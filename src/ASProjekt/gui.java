@@ -183,12 +183,17 @@ public class gui extends JFrame {
 	    m.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	    m.setLeadAnchorNotificationEnabled(false);
 
-		
+	    DefaultListModel listenModell = new DefaultListModel();
+		for(int i=0; i<planes.length; i++){
+	    	listenModell.addElement(planes[i]);
+	    }
+	    
+	    
 		//ENDE LIST MODELL
 		
 	    //TODO: List Mit List Modell erstellen damit es hinzugefügt werden kann.
 	    
-		JList list = new JList(planes);
+		JList list = new JList(listenModell);
 		sl_start.putConstraint(SpringLayout.NORTH, list, 53, SpringLayout.NORTH, start);
 		sl_start.putConstraint(SpringLayout.WEST, list, 10, SpringLayout.WEST, start);
 		sl_start.putConstraint(SpringLayout.EAST, list, 239, SpringLayout.WEST, start);
@@ -287,7 +292,7 @@ public class gui extends JFrame {
 		sl_create.putConstraint(SpringLayout.EAST, timepick_bis, 774, SpringLayout.WEST, create);
 		create.add(timepick_bis);
 		
-		JList lst_leihemoeglich = new JList();
+		JList lst_leihemoeglich = new JList(listenModell);
 		lst_leihemoeglich.setBorder(new LineBorder(new Color(0, 0, 0)));
 		sl_create.putConstraint(SpringLayout.NORTH, lst_leihemoeglich, 35, SpringLayout.SOUTH, datepick);
 		sl_create.putConstraint(SpringLayout.WEST, lst_leihemoeglich, 0, SpringLayout.WEST, datepick);
@@ -303,9 +308,9 @@ public class gui extends JFrame {
 		tabbedPane.addTab("Flugzeug Management", new ImageIcon(gui.class.getResource("/Airplane-Right-Red-icon.png")), manage, null);
 		SpringLayout sl_manage = new SpringLayout();
 		manage.setLayout(sl_manage);
+	    
 		
-		
-		JList saved_planes = new JList(planes);
+		JList saved_planes = new JList(listenModell);
 		sl_manage.putConstraint(SpringLayout.NORTH, saved_planes, 78, SpringLayout.NORTH, manage);
 		sl_manage.putConstraint(SpringLayout.WEST, saved_planes, 23, SpringLayout.WEST, manage);
 		sl_manage.putConstraint(SpringLayout.SOUTH, saved_planes, -107, SpringLayout.SOUTH, manage);
@@ -339,12 +344,10 @@ public class gui extends JFrame {
 		btn_add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				methods.addplane(txt_planeadd.getText());				
-				
-				
-			//	planes=read_write.lesen("planes.txt");
-				//list = new JList(planes);
+				listenModell.addElement(txt_planeadd.getText());
 			}
 		});
+		
 		sl_manage.putConstraint(SpringLayout.EAST, txt_planeadd, -6, SpringLayout.WEST, btn_add);
 		sl_manage.putConstraint(SpringLayout.WEST, btn_add, 476, SpringLayout.WEST, manage);
 		sl_manage.putConstraint(SpringLayout.EAST, btn_add, -214, SpringLayout.EAST, manage);
