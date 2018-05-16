@@ -186,6 +186,8 @@ public class gui extends JFrame {
 		
 		//ENDE LIST MODELL
 		
+	    //TODO: List Mit List Modell erstellen damit es hinzugefügt werden kann.
+	    
 		JList list = new JList(planes);
 		sl_start.putConstraint(SpringLayout.NORTH, list, 53, SpringLayout.NORTH, start);
 		sl_start.putConstraint(SpringLayout.WEST, list, 10, SpringLayout.WEST, start);
