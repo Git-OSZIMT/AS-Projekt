@@ -142,17 +142,22 @@ public class methods {
 	}
 	
 	public static void removeplane(int id) {
+		//TODO: Überarbeiten
 		
 		String planes[]=read_write.lesen("planes.txt");
 		int size = planes.length;
+		
+		//Erstelle ein Array das um wert "1" kleiner als das alte Array ist.
 		String[] resultplanes = new String[size -1];
 		int resulArrayCount = 0;
+		
 		for (int i = 0; i < size; i++) {
 			if (i!=id){
 				resultplanes[resulArrayCount] = planes[i];
 				resulArrayCount++;
 			}
 		}
+		
 		read_write.schreiben(resultplanes, "planes.txt");		
 	}
 	

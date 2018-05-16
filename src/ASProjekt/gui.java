@@ -136,6 +136,7 @@ public class gui extends JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	public gui() {
+		setResizable(false);
 		
 		
 	
@@ -158,7 +159,7 @@ public class gui extends JFrame {
 		setFont(new Font("Times New Roman", Font.PLAIN, 10));
 		setTitle("Buchungs Verwaltung");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 839, 700);
+		setBounds(100, 100, 839, 709);
 		SpringLayout springLayout = new SpringLayout();
 		getContentPane().setLayout(springLayout);
 		
@@ -480,11 +481,7 @@ public class gui extends JFrame {
 					System.out.println(planelist);
 					
 				}
-				
 			}
-		});
-		
-		
-		
+		});	
 	}
 }
