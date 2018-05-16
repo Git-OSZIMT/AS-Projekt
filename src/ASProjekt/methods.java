@@ -3,6 +3,7 @@ package ASProjekt;
 import java.lang.reflect.Array;
 import java.time.LocalTime;
 import java.util.Arrays;
+import ASProjekt.read_write;
 
 public class methods {
 	
