@@ -238,10 +238,9 @@ public class gui extends JFrame {
 		
 		
 		TimePickerSettings timeSettings = new TimePickerSettings();
-		timeSettings.setVetoPolicy(new timeveto());
         timeSettings.generatePotentialMenuTimes(TimeIncrement.OneHour, null, null);
 		
-		
+        
 		JPanel create = new JPanel();
 		create.setAutoscrolls(true);
 		tabbedPane.addTab("Neue Leihe", new ImageIcon(gui.class.getResource("/com/jgoodies/looks/plastic/icons/NewFolder.gif")), create, null);
@@ -257,6 +256,8 @@ public class gui extends JFrame {
 		datepick.setAlignmentX(Component.LEFT_ALIGNMENT);
 		datepick.getComponentDateTextField().setMinimumSize(new Dimension(80, 25));
 		create.add(datepick);
+		
+		
 		TimePicker timepick_von = new TimePicker(timeSettings);
 		sl_create.putConstraint(SpringLayout.WEST, timepick_von, 309, SpringLayout.WEST, create);
 		sl_create.putConstraint(SpringLayout.EAST, datepick, -41, SpringLayout.WEST, timepick_von);
@@ -266,6 +267,7 @@ public class gui extends JFrame {
 		timepick_von.setBounds(new Rectangle(0, 0, 20, 20));
 		sl_create.putConstraint(SpringLayout.NORTH, timepick_von, 74, SpringLayout.NORTH, create);
 		create.add(timepick_von);
+		timeSettings.setVetoPolicy(new timeveto());
 		
 				
 				
@@ -524,7 +526,8 @@ public class gui extends JFrame {
 		btn_rename.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				methods.renameplane(saved_planes.getSelectedIndex(), txt_rename.getSelectedText());
-				
+				listenModell.add(saved_planes.getSelectedIndex() +1, txt_rename.getSelectedText());
+				listenModell.removeElementAt(saved_planes.getSelectedIndex());
 			}
 		});
 		sl_manage.putConstraint(SpringLayout.WEST, btn_rename, 476, SpringLayout.WEST, manage);
