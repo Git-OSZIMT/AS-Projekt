@@ -492,9 +492,11 @@ public class gui extends JFrame {
 		sl_manage.putConstraint(SpringLayout.EAST, btn_rename, -214, SpringLayout.EAST, manage);
 		btn_rename.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				methods.renameplane(saved_planes.getSelectedIndex(), txt_rename.getSelectedText());
-				listenModell.add(saved_planes.getSelectedIndex() +1, txt_rename.getSelectedText());
-				listenModell.removeElementAt(saved_planes.getSelectedIndex());
+				int index=saved_planes.getSelectedIndex();
+				methods.renameplane(index, txt_rename.getText());
+				listenModell.removeElementAt(index);
+				listenModell.add(index, txt_rename.getText());
+			
 			}
 		});
 		sl_manage.putConstraint(SpringLayout.EAST, txt_rename, -6, SpringLayout.WEST, btn_rename);

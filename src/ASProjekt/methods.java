@@ -163,6 +163,7 @@ public class methods {
 	
 	public static void renameplane(int id, String name) {
 		String[] planes=read_write.lesen("planes.txt");
+		System.out.println(id + "ist id");
 		planes[id]=name;
 		read_write.schreiben(planes, "planes.txt");
 	}
