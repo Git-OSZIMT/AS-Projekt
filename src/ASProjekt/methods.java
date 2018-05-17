@@ -168,7 +168,7 @@ public class methods {
 		read_write.schreiben(planes, "planes.txt");
 	}
 	
-	public static void  addleihe(String plane, String von, String bis, String datum, String name) {
+	public static void addleihe(String plane, String von, String bis, String datum, String name) {
 		
 		System.out.println("addleihe gestartet");
 		//von und bis kommen als yy:zz an, benötigt wird xx:yy:zz

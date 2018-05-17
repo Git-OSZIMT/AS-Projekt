@@ -470,7 +470,7 @@ public class gui extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				methods.removeplane(saved_planes.getSelectedIndex());
-				listenModell.addElement(txt_planeadd.getText());
+				listenModell.removeElement(saved_planes.getSelectedValue());
 			}
 		});
 		sl_manage.putConstraint(SpringLayout.NORTH, btnNewButton_1, 18, SpringLayout.SOUTH, saved_planes);
