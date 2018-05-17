@@ -161,12 +161,35 @@ public class methods {
 		read_write.schreiben(resultplanes, "planes.txt");		
 	}
 	
-	public static void renameplane(int i, String name) {
+	public static void renameplane(int id, String name) {
 		String[] planes=read_write.lesen("planes.txt");
-		planes[i]=name;
+		planes[id]=name;
 		read_write.schreiben(planes, "planes.txt");
 	}
 	
+	public static void  addleihe(String plane, String von, String bis, String datum, String name) {
+		
+		System.out.println("addleihe gestartet");
+		//von und bis kommen als yy:zz an, benötigt wird xx:yy:zz
+		von=von + ":00";
+		bis=bis + ":00";
+		
+		
+		//Array wird für alte Daten erstellt
+		String data[] = {};
+		data=read_write.lesen("data.txt");
+		
+		//Initialisierung der Länge für das neue Array
+		int arraylength=0;
+		arraylength=data.length +1;
+		
+		//Neues Array mit Daten füllen und speichern
+		String leihe[] = new String[arraylength];
+		leihe[arraylength]=String.valueOf(arraylength -1) + "," + plane + "," + datum + "," + von + "," + bis + "," + name + ";";	
+		read_write.schreiben(leihe, "data.txt");
+		
+		
+	}
 	
 	
 	

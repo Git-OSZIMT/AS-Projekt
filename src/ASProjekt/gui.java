@@ -44,6 +44,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractListModel;
 import ASProjekt.read_write;
 import ASProjekt.methods;
+import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
 
 
 
@@ -70,6 +72,9 @@ public class gui extends JFrame {
 	private JTextField txt_einnahmen;
 	private JTextField txt_planeadd;
 	private JTextField txt_rename;
+	private JTextField textField;
+	private JTextField txt_freivon;
+	private JTextField txt_freibis;
 
 	
 	/**
@@ -200,11 +205,6 @@ public class gui extends JFrame {
 		sl_start.putConstraint(SpringLayout.EAST, list, 239, SpringLayout.WEST, start);
 	    list.setSelectionModel(m);
 		start.add(list);
-	    
-	    
-		JPanel create = new JPanel();
-		create.setAutoscrolls(true);
-		tabbedPane.addTab("Neue Leihe", new ImageIcon(gui.class.getResource("/com/jgoodies/looks/plastic/icons/NewFolder.gif")), create, null);
 		
 		JLabel lblHeuteVerlieheneFlugzeuge = new JLabel("Heute Verliehene Flugzeuge");
 		sl_start.putConstraint(SpringLayout.NORTH, lblHeuteVerlieheneFlugzeuge, 11, SpringLayout.NORTH, start);
@@ -235,6 +235,16 @@ public class gui extends JFrame {
 		sl_start.putConstraint(SpringLayout.EAST, txt_einnahmen, -577, SpringLayout.EAST, start);
 		start.add(txt_einnahmen);
 		txt_einnahmen.setColumns(10);
+		
+		
+		TimePickerSettings timeSettings = new TimePickerSettings();
+		timeSettings.setVetoPolicy(new timeveto());
+        timeSettings.generatePotentialMenuTimes(TimeIncrement.OneHour, null, null);
+		
+		
+		JPanel create = new JPanel();
+		create.setAutoscrolls(true);
+		tabbedPane.addTab("Neue Leihe", new ImageIcon(gui.class.getResource("/com/jgoodies/looks/plastic/icons/NewFolder.gif")), create, null);
 		SpringLayout sl_create = new SpringLayout();
 		create.setLayout(sl_create);
 		
@@ -247,9 +257,6 @@ public class gui extends JFrame {
 		datepick.setAlignmentX(Component.LEFT_ALIGNMENT);
 		datepick.getComponentDateTextField().setMinimumSize(new Dimension(80, 25));
 		create.add(datepick);
-		
-		
-		TimePickerSettings timeSettings = new TimePickerSettings();
 		TimePicker timepick_von = new TimePicker(timeSettings);
 		sl_create.putConstraint(SpringLayout.WEST, timepick_von, 309, SpringLayout.WEST, create);
 		sl_create.putConstraint(SpringLayout.EAST, datepick, -41, SpringLayout.WEST, timepick_von);
@@ -259,47 +266,184 @@ public class gui extends JFrame {
 		timepick_von.setBounds(new Rectangle(0, 0, 20, 20));
 		sl_create.putConstraint(SpringLayout.NORTH, timepick_von, 74, SpringLayout.NORTH, create);
 		create.add(timepick_von);
-		timeSettings.setVetoPolicy(new timeveto());
-        timeSettings.generatePotentialMenuTimes(TimeIncrement.OneHour, null, null);
+		
+				
+				
+				JLabel lblDatum = new JLabel("Von:");
+				sl_create.putConstraint(SpringLayout.WEST, lblDatum, 0, SpringLayout.WEST, timepick_von);
+				sl_create.putConstraint(SpringLayout.SOUTH, lblDatum, -10, SpringLayout.NORTH, timepick_von);
+				sl_create.putConstraint(SpringLayout.EAST, lblDatum, 0, SpringLayout.EAST, timepick_von);
+				create.add(lblDatum);
+				
+				JLabel lblDatum_1 = new JLabel("Datum:");
+				sl_create.putConstraint(SpringLayout.NORTH, lblDatum_1, 0, SpringLayout.NORTH, lblDatum);
+				sl_create.putConstraint(SpringLayout.WEST, lblDatum_1, 0, SpringLayout.WEST, datepick);
+				create.add(lblDatum_1);
+				
+				JLabel lblBis = new JLabel("Bis");
+				sl_create.putConstraint(SpringLayout.NORTH, lblBis, 0, SpringLayout.NORTH, lblDatum);
+				create.add(lblBis);
+				
+				TimePicker timepick_bis = new TimePicker(timeSettings);
+				timepick_bis.addTimeChangeListener(new TimeChangeListener() {
+					public void timeChanged(TimeChangeEvent event) {
+						//methods.checkvalid;
+					}
+				});
+				sl_create.putConstraint(SpringLayout.EAST, timepick_von, -46, SpringLayout.WEST, timepick_bis);
+				sl_create.putConstraint(SpringLayout.WEST, lblBis, 0, SpringLayout.WEST, timepick_bis);
+				sl_create.putConstraint(SpringLayout.NORTH, timepick_bis, 74, SpringLayout.NORTH, create);
+				sl_create.putConstraint(SpringLayout.WEST, timepick_bis, 557, SpringLayout.WEST, create);
+				sl_create.putConstraint(SpringLayout.SOUTH, timepick_bis, 113, SpringLayout.NORTH, create);
+				sl_create.putConstraint(SpringLayout.EAST, timepick_bis, 774, SpringLayout.WEST, create);
+				create.add(timepick_bis);
+				
+				JList lst_leihemoeglich = new JList(listenModell);
+				lst_leihemoeglich.setBorder(new LineBorder(new Color(0, 0, 0)));
+				sl_create.putConstraint(SpringLayout.NORTH, lst_leihemoeglich, 35, SpringLayout.SOUTH, datepick);
+				sl_create.putConstraint(SpringLayout.WEST, lst_leihemoeglich, 0, SpringLayout.WEST, datepick);
+				sl_create.putConstraint(SpringLayout.SOUTH, lst_leihemoeglich, 352, SpringLayout.SOUTH, datepick);
+				sl_create.putConstraint(SpringLayout.EAST, lst_leihemoeglich, 0, SpringLayout.EAST, datepick);
+				create.add(lst_leihemoeglich);
+				
+				JButton btn_addleihe = new JButton("Leihe Aufnehmen");
+				sl_create.putConstraint(SpringLayout.WEST, btn_addleihe, 0, SpringLayout.WEST, lblBis);
+				sl_create.putConstraint(SpringLayout.SOUTH, btn_addleihe, -147, SpringLayout.SOUTH, create);
+				sl_create.putConstraint(SpringLayout.EAST, btn_addleihe, 248, SpringLayout.EAST, timepick_von);
+				btn_addleihe.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+					
+						//methods.addleihe(plane, von, bis, datum, name);
+						
+					}
+				});
+				create.add(btn_addleihe);
+				
+				JLabel lblBuchungAufName = new JLabel("Buchung auf Name :");
+				sl_create.putConstraint(SpringLayout.NORTH, lblBuchungAufName, 2, SpringLayout.NORTH, lst_leihemoeglich);
+				sl_create.putConstraint(SpringLayout.WEST, lblBuchungAufName, 0, SpringLayout.WEST, lblBis);
+				create.add(lblBuchungAufName);
+				
+				textField = new JTextField();
+				sl_create.putConstraint(SpringLayout.NORTH, btn_addleihe, 189, SpringLayout.SOUTH, textField);
+				sl_create.putConstraint(SpringLayout.NORTH, textField, 6, SpringLayout.SOUTH, lblBuchungAufName);
+				sl_create.putConstraint(SpringLayout.WEST, textField, 0, SpringLayout.WEST, lblBis);
+				sl_create.putConstraint(SpringLayout.SOUTH, textField, -395, SpringLayout.SOUTH, create);
+				sl_create.putConstraint(SpringLayout.EAST, textField, 248, SpringLayout.EAST, timepick_von);
+				create.add(textField);
+				textField.setColumns(10);
+				
+				JLabel lblFreiVon = new JLabel("Frei Von :");
+				sl_create.putConstraint(SpringLayout.NORTH, lblFreiVon, 0, SpringLayout.NORTH, lst_leihemoeglich);
+				sl_create.putConstraint(SpringLayout.WEST, lblFreiVon, 0, SpringLayout.WEST, timepick_von);
+				create.add(lblFreiVon);
+				
+				txt_freivon = new JTextField();
+				sl_create.putConstraint(SpringLayout.NORTH, txt_freivon, 0, SpringLayout.NORTH, textField);
+				sl_create.putConstraint(SpringLayout.WEST, txt_freivon, 41, SpringLayout.EAST, lst_leihemoeglich);
+				sl_create.putConstraint(SpringLayout.SOUTH, txt_freivon, 0, SpringLayout.SOUTH, textField);
+				sl_create.putConstraint(SpringLayout.EAST, txt_freivon, 0, SpringLayout.EAST, timepick_von);
+				create.add(txt_freivon);
+				txt_freivon.setColumns(10);
+				
+				txt_freibis = new JTextField();
+				sl_create.putConstraint(SpringLayout.WEST, txt_freibis, 0, SpringLayout.WEST, timepick_von);
+				sl_create.putConstraint(SpringLayout.EAST, txt_freibis, 0, SpringLayout.EAST, timepick_von);
+				create.add(txt_freibis);
+				txt_freibis.setColumns(10);
+				
+				JLabel lblNewLabel_1 = new JLabel("Frei Bis:");
+				sl_create.putConstraint(SpringLayout.NORTH, txt_freibis, 6, SpringLayout.SOUTH, lblNewLabel_1);
+				sl_create.putConstraint(SpringLayout.SOUTH, txt_freibis, 51, SpringLayout.SOUTH, lblNewLabel_1);
+				sl_create.putConstraint(SpringLayout.SOUTH, lblNewLabel_1, -353, SpringLayout.SOUTH, create);
+				sl_create.putConstraint(SpringLayout.WEST, lblNewLabel_1, 0, SpringLayout.WEST, timepick_von);
+				create.add(lblNewLabel_1);
+				
+				
+				
+				//EventListener
+				
+				timepick_von.addTimeChangeListener(new TimeChangeListener() {
+					public void timeChanged(TimeChangeEvent event) {
+						LocalTime time = timepick_von.getTime();
+						if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
+							String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
+							ArrayList<String> planelist = new ArrayList<>();
+							
+							for (int i=0; i < returnplanes.length; i++) {
+								
+								planelist.add(returnplanes[i]);
+								
+								
+							}
+							
+							boolean exists=true;
+							while(exists == true) {
+							exists = planelist.remove(null);
+							}
+							
+							System.out.println(planelist);
+						}	
+					}
+				});
+				
+				
+				timepick_bis.addTimeChangeListener(new TimeChangeListener() {
+					public void timeChanged(TimeChangeEvent event) {
+						if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
+							String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
+							ArrayList<String> planelist = new ArrayList<>();
+							
+							
+							for (int i=0; i < returnplanes.length; i++) {
+								
+								planelist.add(returnplanes[i]);
+								
+								
+							}
+							
+							boolean exists=true;
+							
+							while(exists == true) {
+							exists = planelist.remove(null);
+							}					
+							System.out.println(planelist);
+							
+							//planelist ist eine ArrayList die alles enthält was angezeigt werden soll.
+							
+							for (int i=0; i < returnplanes.length; i++) {
+								
+							//	listenModell.addElement(planelist);
+								
+							}
 
-		
-		
-		JLabel lblDatum = new JLabel("Von:");
-		sl_create.putConstraint(SpringLayout.WEST, lblDatum, 0, SpringLayout.WEST, timepick_von);
-		sl_create.putConstraint(SpringLayout.SOUTH, lblDatum, -10, SpringLayout.NORTH, timepick_von);
-		sl_create.putConstraint(SpringLayout.EAST, lblDatum, 0, SpringLayout.EAST, timepick_von);
-		create.add(lblDatum);
-		
-		JLabel lblDatum_1 = new JLabel("Datum:");
-		sl_create.putConstraint(SpringLayout.NORTH, lblDatum_1, 0, SpringLayout.NORTH, lblDatum);
-		sl_create.putConstraint(SpringLayout.WEST, lblDatum_1, 0, SpringLayout.WEST, datepick);
-		create.add(lblDatum_1);
-		
-		JLabel lblBis = new JLabel("Bis");
-		sl_create.putConstraint(SpringLayout.NORTH, lblBis, 0, SpringLayout.NORTH, lblDatum);
-		create.add(lblBis);
-		
-		TimePicker timepick_bis = new TimePicker(timeSettings);
-		timepick_bis.addTimeChangeListener(new TimeChangeListener() {
-			public void timeChanged(TimeChangeEvent event) {
-				//methods.checkvalid;
-			}
-		});
-		sl_create.putConstraint(SpringLayout.EAST, timepick_von, -46, SpringLayout.WEST, timepick_bis);
-		sl_create.putConstraint(SpringLayout.WEST, lblBis, 0, SpringLayout.WEST, timepick_bis);
-		sl_create.putConstraint(SpringLayout.NORTH, timepick_bis, 74, SpringLayout.NORTH, create);
-		sl_create.putConstraint(SpringLayout.WEST, timepick_bis, 557, SpringLayout.WEST, create);
-		sl_create.putConstraint(SpringLayout.SOUTH, timepick_bis, 113, SpringLayout.NORTH, create);
-		sl_create.putConstraint(SpringLayout.EAST, timepick_bis, 774, SpringLayout.WEST, create);
-		create.add(timepick_bis);
-		
-		JList lst_leihemoeglich = new JList(listenModell);
-		lst_leihemoeglich.setBorder(new LineBorder(new Color(0, 0, 0)));
-		sl_create.putConstraint(SpringLayout.NORTH, lst_leihemoeglich, 35, SpringLayout.SOUTH, datepick);
-		sl_create.putConstraint(SpringLayout.WEST, lst_leihemoeglich, 0, SpringLayout.WEST, datepick);
-		sl_create.putConstraint(SpringLayout.SOUTH, lst_leihemoeglich, 352, SpringLayout.SOUTH, datepick);
-		sl_create.putConstraint(SpringLayout.EAST, lst_leihemoeglich, 0, SpringLayout.EAST, datepick);
-		create.add(lst_leihemoeglich);
+						}	
+					}
+				});
+				
+				datepick.addDateChangeListener(new DateChangeListener() {
+					public void dateChanged(DateChangeEvent event) {
+						if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
+							String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
+							ArrayList<String> planelist = new ArrayList<>();
+							
+							for (int i=0; i < returnplanes.length; i++) {
+								
+								planelist.add(returnplanes[i]);
+								
+								
+							}
+							
+							boolean exists=true;
+							while(exists == true) {
+							exists = planelist.remove(null);
+							}
+
+							System.out.println(planelist);
+							
+						}
+					}
+				});	
 		
 		
 		//Objekte im Elemente tab
@@ -361,6 +505,7 @@ public class gui extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				methods.removeplane(saved_planes.getSelectedIndex());
+				listenModell.addElement(txt_planeadd.getText());
 			}
 		});
 		sl_manage.putConstraint(SpringLayout.NORTH, btnNewButton_1, 18, SpringLayout.SOUTH, saved_planes);
@@ -397,91 +542,5 @@ public class gui extends JFrame {
 		lblFlugzeugUmbennenen.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		sl_manage.putConstraint(SpringLayout.WEST, lblFlugzeugUmbennenen, 54, SpringLayout.EAST, saved_planes);
 		manage.add(lblFlugzeugUmbennenen);
-		
-		
-		
-		//EventListener
-		
-		timepick_von.addTimeChangeListener(new TimeChangeListener() {
-			public void timeChanged(TimeChangeEvent event) {
-				LocalTime time = timepick_von.getTime();
-				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
-					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-					ArrayList<String> planelist = new ArrayList<>();
-					
-					for (int i=0; i < returnplanes.length; i++) {
-						
-						planelist.add(returnplanes[i]);
-						
-						
-					}
-					
-					boolean exists=true;
-					while(exists == true) {
-					exists = planelist.remove(null);
-					}
-					
-					System.out.println(planelist);
-				}	
-			}
-		});
-		
-		
-		timepick_bis.addTimeChangeListener(new TimeChangeListener() {
-			public void timeChanged(TimeChangeEvent event) {
-				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
-					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-					ArrayList<String> planelist = new ArrayList<>();
-					
-					
-					for (int i=0; i < returnplanes.length; i++) {
-						
-						planelist.add(returnplanes[i]);
-						
-						
-					}
-					
-					boolean exists=true;
-					
-					while(exists == true) {
-					exists = planelist.remove(null);
-					}					
-					System.out.println(planelist);
-					
-					//planelist ist eine ArrayList die alles enthält was angezeigt werden soll.
-					
-					for (int i=0; i < returnplanes.length; i++) {
-						
-					//	listenModell.addElement(planelist);
-						
-					}
-
-				}	
-			}
-		});
-		
-		datepick.addDateChangeListener(new DateChangeListener() {
-			public void dateChanged(DateChangeEvent event) {
-				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
-					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-					ArrayList<String> planelist = new ArrayList<>();
-					
-					for (int i=0; i < returnplanes.length; i++) {
-						
-						planelist.add(returnplanes[i]);
-						
-						
-					}
-					
-					boolean exists=true;
-					while(exists == true) {
-					exists = planelist.remove(null);
-					}
-
-					System.out.println(planelist);
-					
-				}
-			}
-		});	
 	}
 }
