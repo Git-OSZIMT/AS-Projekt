@@ -120,6 +120,8 @@ public class read_write {
 		  }
 		  //************************************************************************************
 
+		  
+		  
 		  static void verzeichnislesen()
 		  {
 		    File datei = new File(".\\");//(".\\Test")RelativesVerzeichniss sonst direkt
@@ -134,8 +136,10 @@ public class read_write {
 		    }
 
 		  }
-		  static boolean dateiNamenPruefung(String dateiname)
-		  {
+		  
+
+		  
+		  static boolean dateiNamenPruefung(String dateiname){
 		    File datei = new File(".\\");
 		    boolean gefunden = false;
 		    String dateienVerzeichnisse[] = datei.list();

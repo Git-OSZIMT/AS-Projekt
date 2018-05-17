@@ -49,6 +49,7 @@ import javax.swing.JFormattedTextField;
 
 
 
+@SuppressWarnings("unused")
 class timeveto implements TimeVetoPolicy {
 
     /**
@@ -97,49 +98,13 @@ public class gui extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});
-		
-		
-		//MAIN CODE
-		
-		
-		//Arrays erstellen
-		//Arraystruktur : id;Flugzeug;Datum;Von;Bis;Name;\n
-		String datas[] = {};
-		String planes[] = {};
-		//Arrays Einlesen
-		try {
-		
-		datas=read_write.lesen("data.txt");
-		planes=read_write.lesen("planes.txt");
-		
-	}catch(ArrayIndexOutOfBoundsException exception){
-		
-		//TODO
-		System.out.println("catched");
-	}
-		
-		
-		//DEBUG METHODE ZUR AUSGABE DES ARRAYS
-		
-		for (int i=0; i <= (datas.length -1); i++) {
-		System.out.println(datas[i]);
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		});		
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public gui() {
 		setResizable(false);
 		
@@ -197,7 +162,7 @@ public class gui extends JFrame {
 	    
 		//ENDE LIST MODELL
 		
-	    //TODO: List Mit List Modell erstellen damit es hinzugefügt werden kann.
+
 	    
 		JList list = new JList(listenModell);
 		sl_start.putConstraint(SpringLayout.NORTH, list, 53, SpringLayout.NORTH, start);
@@ -271,181 +236,180 @@ public class gui extends JFrame {
 		
 				
 				
-				JLabel lblDatum = new JLabel("Von:");
-				sl_create.putConstraint(SpringLayout.WEST, lblDatum, 0, SpringLayout.WEST, timepick_von);
-				sl_create.putConstraint(SpringLayout.SOUTH, lblDatum, -10, SpringLayout.NORTH, timepick_von);
-				sl_create.putConstraint(SpringLayout.EAST, lblDatum, 0, SpringLayout.EAST, timepick_von);
-				create.add(lblDatum);
+		JLabel lblDatum = new JLabel("Von:");
+		sl_create.putConstraint(SpringLayout.WEST, lblDatum, 0, SpringLayout.WEST, timepick_von);
+		sl_create.putConstraint(SpringLayout.SOUTH, lblDatum, -10, SpringLayout.NORTH, timepick_von);
+		sl_create.putConstraint(SpringLayout.EAST, lblDatum, 0, SpringLayout.EAST, timepick_von);
+		create.add(lblDatum);
 				
-				JLabel lblDatum_1 = new JLabel("Datum:");
-				sl_create.putConstraint(SpringLayout.NORTH, lblDatum_1, 0, SpringLayout.NORTH, lblDatum);
-				sl_create.putConstraint(SpringLayout.WEST, lblDatum_1, 0, SpringLayout.WEST, datepick);
-				create.add(lblDatum_1);
+		JLabel lblDatum_1 = new JLabel("Datum:");
+		sl_create.putConstraint(SpringLayout.NORTH, lblDatum_1, 0, SpringLayout.NORTH, lblDatum);
+		sl_create.putConstraint(SpringLayout.WEST, lblDatum_1, 0, SpringLayout.WEST, datepick);
+		create.add(lblDatum_1);
 				
-				JLabel lblBis = new JLabel("Bis");
-				sl_create.putConstraint(SpringLayout.NORTH, lblBis, 0, SpringLayout.NORTH, lblDatum);
-				create.add(lblBis);
+		JLabel lblBis = new JLabel("Bis");
+		sl_create.putConstraint(SpringLayout.NORTH, lblBis, 0, SpringLayout.NORTH, lblDatum);
+		create.add(lblBis);
+			
+		TimePicker timepick_bis = new TimePicker(timeSettings);
+		timepick_bis.addTimeChangeListener(new TimeChangeListener() {
+		public void timeChanged(TimeChangeEvent event) {
+			//methods.checkvalid;
+			}
+		});
+		sl_create.putConstraint(SpringLayout.EAST, timepick_von, -46, SpringLayout.WEST, timepick_bis);
+		sl_create.putConstraint(SpringLayout.WEST, lblBis, 0, SpringLayout.WEST, timepick_bis);
+		sl_create.putConstraint(SpringLayout.NORTH, timepick_bis, 74, SpringLayout.NORTH, create);
+		sl_create.putConstraint(SpringLayout.WEST, timepick_bis, 557, SpringLayout.WEST, create);
+		sl_create.putConstraint(SpringLayout.SOUTH, timepick_bis, 113, SpringLayout.NORTH, create);
+		sl_create.putConstraint(SpringLayout.EAST, timepick_bis, 774, SpringLayout.WEST, create);
+		create.add(timepick_bis);
 				
-				TimePicker timepick_bis = new TimePicker(timeSettings);
-				timepick_bis.addTimeChangeListener(new TimeChangeListener() {
-					public void timeChanged(TimeChangeEvent event) {
-						//methods.checkvalid;
-					}
-				});
-				sl_create.putConstraint(SpringLayout.EAST, timepick_von, -46, SpringLayout.WEST, timepick_bis);
-				sl_create.putConstraint(SpringLayout.WEST, lblBis, 0, SpringLayout.WEST, timepick_bis);
-				sl_create.putConstraint(SpringLayout.NORTH, timepick_bis, 74, SpringLayout.NORTH, create);
-				sl_create.putConstraint(SpringLayout.WEST, timepick_bis, 557, SpringLayout.WEST, create);
-				sl_create.putConstraint(SpringLayout.SOUTH, timepick_bis, 113, SpringLayout.NORTH, create);
-				sl_create.putConstraint(SpringLayout.EAST, timepick_bis, 774, SpringLayout.WEST, create);
-				create.add(timepick_bis);
+		JList lst_leihemoeglich = new JList(listenModell);
+		lst_leihemoeglich.setBorder(new LineBorder(new Color(0, 0, 0)));
+		sl_create.putConstraint(SpringLayout.NORTH, lst_leihemoeglich, 35, SpringLayout.SOUTH, datepick);
+		sl_create.putConstraint(SpringLayout.WEST, lst_leihemoeglich, 0, SpringLayout.WEST, datepick);
+		sl_create.putConstraint(SpringLayout.SOUTH, lst_leihemoeglich, 352, SpringLayout.SOUTH, datepick);
+		sl_create.putConstraint(SpringLayout.EAST, lst_leihemoeglich, 0, SpringLayout.EAST, datepick);
+		create.add(lst_leihemoeglich);
 				
-				JList lst_leihemoeglich = new JList(listenModell);
-				lst_leihemoeglich.setBorder(new LineBorder(new Color(0, 0, 0)));
-				sl_create.putConstraint(SpringLayout.NORTH, lst_leihemoeglich, 35, SpringLayout.SOUTH, datepick);
-				sl_create.putConstraint(SpringLayout.WEST, lst_leihemoeglich, 0, SpringLayout.WEST, datepick);
-				sl_create.putConstraint(SpringLayout.SOUTH, lst_leihemoeglich, 352, SpringLayout.SOUTH, datepick);
-				sl_create.putConstraint(SpringLayout.EAST, lst_leihemoeglich, 0, SpringLayout.EAST, datepick);
-				create.add(lst_leihemoeglich);
-				
-				JButton btn_addleihe = new JButton("Leihe Aufnehmen");
-				sl_create.putConstraint(SpringLayout.WEST, btn_addleihe, 0, SpringLayout.WEST, lblBis);
-				sl_create.putConstraint(SpringLayout.SOUTH, btn_addleihe, -147, SpringLayout.SOUTH, create);
-				sl_create.putConstraint(SpringLayout.EAST, btn_addleihe, 248, SpringLayout.EAST, timepick_von);
-				btn_addleihe.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
+		JButton btn_addleihe = new JButton("Leihe Aufnehmen");
+		sl_create.putConstraint(SpringLayout.WEST, btn_addleihe, 0, SpringLayout.WEST, lblBis);
+		sl_create.putConstraint(SpringLayout.SOUTH, btn_addleihe, -147, SpringLayout.SOUTH, create);
+		sl_create.putConstraint(SpringLayout.EAST, btn_addleihe, 248, SpringLayout.EAST, timepick_von);
+		btn_addleihe.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
 					
 						//methods.addleihe(plane, von, bis, datum, name);
 						
+			}
+		});
+		create.add(btn_addleihe);
+				
+		JLabel lblBuchungAufName = new JLabel("Buchung auf Name :");
+		sl_create.putConstraint(SpringLayout.NORTH, lblBuchungAufName, 2, SpringLayout.NORTH, lst_leihemoeglich);
+		sl_create.putConstraint(SpringLayout.WEST, lblBuchungAufName, 0, SpringLayout.WEST, lblBis);
+		create.add(lblBuchungAufName);
+				
+		textField = new JTextField();
+		sl_create.putConstraint(SpringLayout.NORTH, btn_addleihe, 189, SpringLayout.SOUTH, textField);
+		sl_create.putConstraint(SpringLayout.NORTH, textField, 6, SpringLayout.SOUTH, lblBuchungAufName);
+		sl_create.putConstraint(SpringLayout.WEST, textField, 0, SpringLayout.WEST, lblBis);
+		sl_create.putConstraint(SpringLayout.SOUTH, textField, -395, SpringLayout.SOUTH, create);
+		sl_create.putConstraint(SpringLayout.EAST, textField, 248, SpringLayout.EAST, timepick_von);
+		create.add(textField);
+		textField.setColumns(10);
+				
+		JLabel lblFreiVon = new JLabel("Frei Von :");
+		sl_create.putConstraint(SpringLayout.NORTH, lblFreiVon, 0, SpringLayout.NORTH, lst_leihemoeglich);
+		sl_create.putConstraint(SpringLayout.WEST, lblFreiVon, 0, SpringLayout.WEST, timepick_von);
+		create.add(lblFreiVon);
+				
+		txt_freivon = new JTextField();
+		sl_create.putConstraint(SpringLayout.NORTH, txt_freivon, 0, SpringLayout.NORTH, textField);
+		sl_create.putConstraint(SpringLayout.WEST, txt_freivon, 41, SpringLayout.EAST, lst_leihemoeglich);
+		sl_create.putConstraint(SpringLayout.SOUTH, txt_freivon, 0, SpringLayout.SOUTH, textField);
+		sl_create.putConstraint(SpringLayout.EAST, txt_freivon, 0, SpringLayout.EAST, timepick_von);
+		create.add(txt_freivon);
+		txt_freivon.setColumns(10);
+				
+		txt_freibis = new JTextField();
+		sl_create.putConstraint(SpringLayout.WEST, txt_freibis, 0, SpringLayout.WEST, timepick_von);
+		sl_create.putConstraint(SpringLayout.EAST, txt_freibis, 0, SpringLayout.EAST, timepick_von);
+		create.add(txt_freibis);
+		txt_freibis.setColumns(10);
+				
+		JLabel lblNewLabel_1 = new JLabel("Frei Bis:");
+		sl_create.putConstraint(SpringLayout.NORTH, txt_freibis, 6, SpringLayout.SOUTH, lblNewLabel_1);
+		sl_create.putConstraint(SpringLayout.SOUTH, txt_freibis, 51, SpringLayout.SOUTH, lblNewLabel_1);
+		sl_create.putConstraint(SpringLayout.SOUTH, lblNewLabel_1, -353, SpringLayout.SOUTH, create);
+		sl_create.putConstraint(SpringLayout.WEST, lblNewLabel_1, 0, SpringLayout.WEST, timepick_von);
+		create.add(lblNewLabel_1);
+				
+				
+				
+		//EventListener
+				
+		timepick_von.addTimeChangeListener(new TimeChangeListener() {
+		public void timeChanged(TimeChangeEvent event) {
+				LocalTime time = timepick_von.getTime();
+				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
+					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
+					ArrayList<String> planelist = new ArrayList<>();
+					
+					for (int i=0; i < returnplanes.length; i++) {
+								
+						planelist.add(returnplanes[i]);
+								
+								
 					}
-				});
-				create.add(btn_addleihe);
-				
-				JLabel lblBuchungAufName = new JLabel("Buchung auf Name :");
-				sl_create.putConstraint(SpringLayout.NORTH, lblBuchungAufName, 2, SpringLayout.NORTH, lst_leihemoeglich);
-				sl_create.putConstraint(SpringLayout.WEST, lblBuchungAufName, 0, SpringLayout.WEST, lblBis);
-				create.add(lblBuchungAufName);
-				
-				textField = new JTextField();
-				sl_create.putConstraint(SpringLayout.NORTH, btn_addleihe, 189, SpringLayout.SOUTH, textField);
-				sl_create.putConstraint(SpringLayout.NORTH, textField, 6, SpringLayout.SOUTH, lblBuchungAufName);
-				sl_create.putConstraint(SpringLayout.WEST, textField, 0, SpringLayout.WEST, lblBis);
-				sl_create.putConstraint(SpringLayout.SOUTH, textField, -395, SpringLayout.SOUTH, create);
-				sl_create.putConstraint(SpringLayout.EAST, textField, 248, SpringLayout.EAST, timepick_von);
-				create.add(textField);
-				textField.setColumns(10);
-				
-				JLabel lblFreiVon = new JLabel("Frei Von :");
-				sl_create.putConstraint(SpringLayout.NORTH, lblFreiVon, 0, SpringLayout.NORTH, lst_leihemoeglich);
-				sl_create.putConstraint(SpringLayout.WEST, lblFreiVon, 0, SpringLayout.WEST, timepick_von);
-				create.add(lblFreiVon);
-				
-				txt_freivon = new JTextField();
-				sl_create.putConstraint(SpringLayout.NORTH, txt_freivon, 0, SpringLayout.NORTH, textField);
-				sl_create.putConstraint(SpringLayout.WEST, txt_freivon, 41, SpringLayout.EAST, lst_leihemoeglich);
-				sl_create.putConstraint(SpringLayout.SOUTH, txt_freivon, 0, SpringLayout.SOUTH, textField);
-				sl_create.putConstraint(SpringLayout.EAST, txt_freivon, 0, SpringLayout.EAST, timepick_von);
-				create.add(txt_freivon);
-				txt_freivon.setColumns(10);
-				
-				txt_freibis = new JTextField();
-				sl_create.putConstraint(SpringLayout.WEST, txt_freibis, 0, SpringLayout.WEST, timepick_von);
-				sl_create.putConstraint(SpringLayout.EAST, txt_freibis, 0, SpringLayout.EAST, timepick_von);
-				create.add(txt_freibis);
-				txt_freibis.setColumns(10);
-				
-				JLabel lblNewLabel_1 = new JLabel("Frei Bis:");
-				sl_create.putConstraint(SpringLayout.NORTH, txt_freibis, 6, SpringLayout.SOUTH, lblNewLabel_1);
-				sl_create.putConstraint(SpringLayout.SOUTH, txt_freibis, 51, SpringLayout.SOUTH, lblNewLabel_1);
-				sl_create.putConstraint(SpringLayout.SOUTH, lblNewLabel_1, -353, SpringLayout.SOUTH, create);
-				sl_create.putConstraint(SpringLayout.WEST, lblNewLabel_1, 0, SpringLayout.WEST, timepick_von);
-				create.add(lblNewLabel_1);
-				
-				
-				
-				//EventListener
-				
-				timepick_von.addTimeChangeListener(new TimeChangeListener() {
-					public void timeChanged(TimeChangeEvent event) {
-						LocalTime time = timepick_von.getTime();
-						if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
-							String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-							ArrayList<String> planelist = new ArrayList<>();
 							
-							for (int i=0; i < returnplanes.length; i++) {
-								
-								planelist.add(returnplanes[i]);
-								
-								
-							}
-							
-							boolean exists=true;
-							while(exists == true) {
+					boolean exists=true;
+						while(exists == true) {
 							exists = planelist.remove(null);
 							}
 							
 							System.out.println(planelist);
 						}	
+				}
+			});
+						
+		timepick_bis.addTimeChangeListener(new TimeChangeListener() {
+		public void timeChanged(TimeChangeEvent event) {
+				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
+					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
+					ArrayList<String> planelist = new ArrayList<>();
+							
+							
+					for (int i=0; i < returnplanes.length; i++) {
+								
+					planelist.add(returnplanes[i]);
+								
+								
 					}
-				});
-				
-				
-				timepick_bis.addTimeChangeListener(new TimeChangeListener() {
-					public void timeChanged(TimeChangeEvent event) {
-						if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
-							String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-							ArrayList<String> planelist = new ArrayList<>();
 							
+					boolean exists=true;
 							
-							for (int i=0; i < returnplanes.length; i++) {
+					while(exists == true) {
+					exists = planelist.remove(null);
+					}					
+					System.out.println(planelist);
+							
+					//planelist ist eine ArrayList die alles enthält was angezeigt werden soll.
+							
+					for (int i=0; i < returnplanes.length; i++) {
 								
-								planelist.add(returnplanes[i]);
+					//	listenModell.addElement(planelist);
 								
-								
-							}
-							
-							boolean exists=true;
-							
-							while(exists == true) {
-							exists = planelist.remove(null);
-							}					
-							System.out.println(planelist);
-							
-							//planelist ist eine ArrayList die alles enthält was angezeigt werden soll.
-							
-							for (int i=0; i < returnplanes.length; i++) {
-								
-							//	listenModell.addElement(planelist);
-								
-							}
+					}
 
-						}	
-					}
-				});
+				}	
+			}
+		});
 				
-				datepick.addDateChangeListener(new DateChangeListener() {
-					public void dateChanged(DateChangeEvent event) {
-						if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
-							String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-							ArrayList<String> planelist = new ArrayList<>();
+		datepick.addDateChangeListener(new DateChangeListener() {
+		public void dateChanged(DateChangeEvent event) {
+				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
+					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
+					ArrayList<String> planelist = new ArrayList<>();
 							
-							for (int i=0; i < returnplanes.length; i++) {
+					for (int i=0; i < returnplanes.length; i++) {
 								
-								planelist.add(returnplanes[i]);
+						planelist.add(returnplanes[i]);
 								
 								
-							}
-							
-							boolean exists=true;
-							while(exists == true) {
-							exists = planelist.remove(null);
-							}
-
-							System.out.println(planelist);
-							
-						}
 					}
-				});	
+							
+					boolean exists=true;
+					while(exists == true) {
+					exists = planelist.remove(null);
+					}
+
+					System.out.println(planelist);
+							
+					}
+				}
+		});	
 		
 		
 		//Objekte im Elemente tab
@@ -468,6 +432,7 @@ public class gui extends JFrame {
 		txt_planeadd = new JTextField();
 		sl_manage.putConstraint(SpringLayout.NORTH, txt_planeadd, 142, SpringLayout.NORTH, manage);
 		sl_manage.putConstraint(SpringLayout.WEST, txt_planeadd, 50, SpringLayout.EAST, saved_planes);
+		sl_manage.putConstraint(SpringLayout.EAST, txt_planeadd, -358, SpringLayout.EAST, manage);
 		manage.add(txt_planeadd);
 		txt_planeadd.setColumns(10);
 		
@@ -488,18 +453,16 @@ public class gui extends JFrame {
 		manage.add(lblFlugzeugeInDer);
 		
 		JButton btn_add = new JButton("Hinzuf\u00FCgen");
+		sl_manage.putConstraint(SpringLayout.NORTH, btn_add, -1, SpringLayout.NORTH, txt_planeadd);
+		sl_manage.putConstraint(SpringLayout.WEST, btn_add, 6, SpringLayout.EAST, txt_planeadd);
+		sl_manage.putConstraint(SpringLayout.SOUTH, btn_add, -431, SpringLayout.SOUTH, manage);
+		sl_manage.putConstraint(SpringLayout.EAST, btn_add, -214, SpringLayout.EAST, manage);
 		btn_add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				methods.addplane(txt_planeadd.getText());				
 				listenModell.addElement(txt_planeadd.getText());
 			}
 		});
-		
-		sl_manage.putConstraint(SpringLayout.EAST, txt_planeadd, -6, SpringLayout.WEST, btn_add);
-		sl_manage.putConstraint(SpringLayout.WEST, btn_add, 476, SpringLayout.WEST, manage);
-		sl_manage.putConstraint(SpringLayout.EAST, btn_add, -214, SpringLayout.EAST, manage);
-		sl_manage.putConstraint(SpringLayout.NORTH, btn_add, 138, SpringLayout.NORTH, manage);
-		sl_manage.putConstraint(SpringLayout.SOUTH, btn_add, -413, SpringLayout.SOUTH, manage);
 		btn_add.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		manage.add(btn_add);
 		
@@ -523,6 +486,10 @@ public class gui extends JFrame {
 		txt_rename.setColumns(10);
 		
 		JButton btn_rename = new JButton("Umbenennen");
+		sl_manage.putConstraint(SpringLayout.NORTH, btn_rename, 82, SpringLayout.SOUTH, btn_add);
+		sl_manage.putConstraint(SpringLayout.WEST, btn_rename, 476, SpringLayout.WEST, manage);
+		sl_manage.putConstraint(SpringLayout.SOUTH, btn_rename, -309, SpringLayout.SOUTH, manage);
+		sl_manage.putConstraint(SpringLayout.EAST, btn_rename, -214, SpringLayout.EAST, manage);
 		btn_rename.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				methods.renameplane(saved_planes.getSelectedIndex(), txt_rename.getSelectedText());
@@ -530,16 +497,12 @@ public class gui extends JFrame {
 				listenModell.removeElementAt(saved_planes.getSelectedIndex());
 			}
 		});
-		sl_manage.putConstraint(SpringLayout.WEST, btn_rename, 476, SpringLayout.WEST, manage);
 		sl_manage.putConstraint(SpringLayout.EAST, txt_rename, -6, SpringLayout.WEST, btn_rename);
 		btn_rename.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		sl_manage.putConstraint(SpringLayout.NORTH, btn_rename, 64, SpringLayout.SOUTH, btn_add);
-		sl_manage.putConstraint(SpringLayout.SOUTH, btn_rename, -309, SpringLayout.SOUTH, manage);
-		sl_manage.putConstraint(SpringLayout.EAST, btn_rename, 0, SpringLayout.EAST, btn_add);
 		manage.add(btn_rename);
 		
 		JLabel lblFlugzeugUmbennenen = new JLabel("Flugzeug umbennenen");
-		sl_manage.putConstraint(SpringLayout.SOUTH, txt_planeadd, -25, SpringLayout.NORTH, lblFlugzeugUmbennenen);
+		sl_manage.putConstraint(SpringLayout.SOUTH, txt_planeadd, -42, SpringLayout.NORTH, lblFlugzeugUmbennenen);
 		sl_manage.putConstraint(SpringLayout.SOUTH, lblFlugzeugUmbennenen, -367, SpringLayout.SOUTH, manage);
 		sl_manage.putConstraint(SpringLayout.NORTH, txt_rename, 18, SpringLayout.SOUTH, lblFlugzeugUmbennenen);
 		lblFlugzeugUmbennenen.setFont(new Font("Tahoma", Font.PLAIN, 17));
