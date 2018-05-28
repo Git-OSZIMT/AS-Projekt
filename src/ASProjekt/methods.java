@@ -177,17 +177,27 @@ public class methods {
 		
 		
 		//Array wird für alte Daten erstellt
-		String data[] = {};
-		data=read_write.lesen("data.txt");
+		String data[] = read_write.lesen("data.txt");
 		
 		//Initialisierung der Länge für das neue Array
 		int arraylength=0;
 		arraylength=data.length +1;
+		System.out.print("Arraylenght: "+arraylength+"/n");
 		
-		//Neues Array mit Daten füllen und speichern
-		String leihe[] = new String[arraylength];
-		leihe[arraylength]=String.valueOf(arraylength -1) + "," + plane + "," + datum + "," + von + "," + bis + "," + name + ";";	
-		read_write.schreiben(leihe, "data.txt");
+		//Kopieren aller Werte von altem Array in neues Array
+		
+		String data1[]= new String[arraylength];
+
+		for (int i=0; i < data.length; i++) {
+
+			data1[i]=data[i];			
+			System.out.println(data1[i]);
+		}
+		
+		//hinzufügen des neuen Eintrages in das neue Array + Datei umschreiben
+		
+		data1[arraylength -1]=String.valueOf(arraylength -1) + "," + plane + "," + datum + "," + von + "," + bis + "," + name + ";";	
+		read_write.schreiben(data1, "data.txt");
 		
 		
 	}

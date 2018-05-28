@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/lkohl/eclipse-workspace/HelloWorld/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lkohl/eclipse-workspace/HelloWorld/jgoodies-common-1.2.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lkohl/eclipse-workspace/HelloWorld/jgoodies-forms-1.8.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lkohl/eclipse-workspace/HelloWorld/jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lkohl/eclipse-workspace/HelloWorld/jgoodies-looks-2.4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lkohl/eclipse-workspace/HelloWorld/junit-4.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lkohl/eclipse-workspace/HelloWorld/LGoodDatePicker-10.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lkohl/eclipse-workspace/HelloWorld/miglayout15-swing.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lkohl/eclipse-workspace/HelloWorld/oszimtJE.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lkohl/eclipse-workspace/HelloWorld/oszimtNB.jar"/>
 	<classpathentry kind="src" path="img"/>
+	<classpathentry kind="lib" path="C:/Users/leon.limacardoso/OneDrive - Mister Spex GmbH/OSZIMT/AS/library/Jars/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/leon.limacardoso/OneDrive - Mister Spex GmbH/OSZIMT/AS/library/Jars/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/leon.limacardoso/OneDrive - Mister Spex GmbH/OSZIMT/AS/library/Jars/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/leon.limacardoso/OneDrive - Mister Spex GmbH/OSZIMT/AS/library/Jars/jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/leon.limacardoso/OneDrive - Mister Spex GmbH/OSZIMT/AS/library/Jars/jgoodies-looks-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/leon.limacardoso/OneDrive - Mister Spex GmbH/OSZIMT/AS/library/Jars/junit-4.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/leon.limacardoso/OneDrive - Mister Spex GmbH/OSZIMT/AS/library/Jars/LGoodDatePicker-10.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/leon.limacardoso/OneDrive - Mister Spex GmbH/OSZIMT/AS/library/Jars/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="C:/Users/leon.limacardoso/OneDrive - Mister Spex GmbH/OSZIMT/AS/library/Jars/oszimtJE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/leon.limacardoso/OneDrive - Mister Spex GmbH/OSZIMT/AS/library/Jars/oszimtNB.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

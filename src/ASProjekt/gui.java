@@ -279,9 +279,29 @@ public class gui extends JFrame {
 		sl_create.putConstraint(SpringLayout.EAST, btn_addleihe, 248, SpringLayout.EAST, timepick_von);
 		btn_addleihe.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-					
-						//methods.addleihe(plane, von, bis, datum, name);
-						
+				
+				
+			
+				String plane = String.valueOf(lst_leihemoeglich.getSelectedValue());
+				String von = timepick_von.getTimeStringOrEmptyString();
+				String bis = timepick_bis.getTimeStringOrEmptyString();
+				String datum = datepick.getDateStringOrEmptyString();
+				String name = textField.getText();	
+				
+				/*
+				//Debug-Möglichkeit (Console Output der Benötigten Variablen und ihrem Inhalt (On-Click))
+				
+				System.out.print("Plane: "+plane+"\n");
+				System.out.print("Von: "+von+"\n");
+				System.out.print("Bis: "+bis+"\n");
+				System.out.print("Datum: "+datum+"\n");
+				System.out.print("Name: "+name+"\n");
+				*/
+
+				
+				methods.addleihe(plane, von, bis, datum, name);
+				
+				
 			}
 		});
 		create.add(btn_addleihe);
