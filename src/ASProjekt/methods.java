@@ -182,7 +182,7 @@ public class methods {
 		//Initialisierung der Länge für das neue Array
 		int arraylength=0;
 		arraylength=data.length +1;
-		System.out.print("Arraylenght: "+arraylength+"/n");
+		System.out.print("Arraylenght: "+arraylength+"\n");
 		
 		//Kopieren aller Werte von altem Array in neues Array
 		
@@ -196,7 +196,7 @@ public class methods {
 		
 		//hinzufügen des neuen Eintrages in das neue Array + Datei umschreiben
 		
-		data1[arraylength -1]=String.valueOf(arraylength -1) + "," + plane + "," + datum + "," + von + "," + bis + "," + name + ";";	
+		data1[arraylength -1]="0"+String.valueOf(arraylength -1) + ";" + plane + ";" + datum + ";" + von + ";" + bis + ";" + name + ";";	
 		read_write.schreiben(data1, "data.txt");
 		
 		
