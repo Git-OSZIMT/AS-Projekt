@@ -202,6 +202,51 @@ public class methods {
 		
 	}
 	
+	public static void leiheavailable(String plane, String von, String bis, String datum) {
+		
+		//Deklarierung der benötigten Arrays
+		
+		String data[] = read_write.lesen("data.txt");
+		String planes[][] = new String[data.length][4];
+		
+		//Start der Schleife (auslesen des Data-Arrays und Splitting in 2D-Array)
+		
+		for (int i = 0; i < data.length; i++) {
+			
+			String data2 = data[i];
+			String datasplit[] = data2.split(";");
+			
+			/*
+			 * datasplit[0]: ArrayPlatz
+			 * datasplit[1]: Flugzeugname
+			 * datasplit[2]: Datum
+			 * datasplit[3]: von
+			 * datasplit[4]: bis
+			 * datasplit[5]: Name der Buchung
+			 */
+			
+			planes[i][0] = datasplit[1];
+			planes[i][1] = datasplit[2];
+			planes[i][2] = datasplit[3];
+			planes[i][3] = datasplit[4];
+			
+		}
+		
+		/* Debug (Anzeige der einzelnen Variablen in Console)
+		for (int i = 0; i < planes.length; i++) {
+			
+			System.out.println((i+1)+". Arrayfeld\n");
+			System.out.println("Flugzeug: "+planes[i][0]);
+			System.out.println("Datum: "+planes[i][1]);
+			System.out.println("Von "+planes[i][2]);
+			System.out.println("Bis :"+planes[i][3]+"\n");
+		}
+		*/
+		
+		
+		
+	}
+	
 	
 	
 }
