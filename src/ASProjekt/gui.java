@@ -158,7 +158,9 @@ public class gui extends JFrame {
 		for(int i=0; i<planes.length; i++){
 	    	listenModell.addElement(planes[i]);
 	    }
-	    
+	    DefaultListModel availableplanes = new DefaultListModel();
+
+		
 	    
 		//ENDE LIST MODELL
 		
@@ -265,7 +267,7 @@ public class gui extends JFrame {
 		sl_create.putConstraint(SpringLayout.EAST, timepick_bis, 774, SpringLayout.WEST, create);
 		create.add(timepick_bis);
 				
-		JList lst_leihemoeglich = new JList(listenModell);
+		JList lst_leihemoeglich = new JList(availableplanes);
 		lst_leihemoeglich.setBorder(new LineBorder(new Color(0, 0, 0)));
 		sl_create.putConstraint(SpringLayout.NORTH, lst_leihemoeglich, 35, SpringLayout.SOUTH, datepick);
 		sl_create.putConstraint(SpringLayout.WEST, lst_leihemoeglich, 0, SpringLayout.WEST, datepick);
@@ -356,17 +358,25 @@ public class gui extends JFrame {
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
 					ArrayList<String> planelist = new ArrayList<>();
+
+
+					for (int i = 0; i < availableplanes.size(); i++) {
+						
+						availableplanes.removeAllElements();
+					}
+					
+					
 					
 					for (int i=0; i < returnplanes.length; i++) {
 								
-						planelist.add(returnplanes[i]);
+						availableplanes.addElement(returnplanes[i]);
 								
 								
 					}
 							
 					boolean exists=true;
 						while(exists == true) {
-							exists = planelist.remove(null);
+							exists = availableplanes.removeElement(null);
 							}
 							
 							System.out.println(planelist);
@@ -379,11 +389,16 @@ public class gui extends JFrame {
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
 					ArrayList<String> planelist = new ArrayList<>();
-							
+					
+					for (int i = 0; i < availableplanes.size(); i++) {
+						
+						availableplanes.removeAllElements();
+					}					
+					
 							
 					for (int i=0; i < returnplanes.length; i++) {
 								
-					planelist.add(returnplanes[i]);
+						availableplanes.addElement(returnplanes[i]);
 								
 								
 					}
@@ -391,7 +406,7 @@ public class gui extends JFrame {
 					boolean exists=true;
 							
 					while(exists == true) {
-					exists = planelist.remove(null);
+					exists = availableplanes.removeElement(null);
 					}					
 					System.out.println(planelist);
 							
@@ -413,16 +428,22 @@ public class gui extends JFrame {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
 					ArrayList<String> planelist = new ArrayList<>();
 							
+					for (int i = 0; i < availableplanes.size(); i++) {
+						
+						availableplanes.removeAllElements();
+					}
+					
+					
 					for (int i=0; i < returnplanes.length; i++) {
 								
-						planelist.add(returnplanes[i]);
+						availableplanes.addElement(returnplanes[i]);
 								
 								
 					}
 							
 					boolean exists=true;
 					while(exists == true) {
-					exists = planelist.remove(null);
+					exists = availableplanes.removeElement(null);
 					}
 
 					System.out.println(planelist);
