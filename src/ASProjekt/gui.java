@@ -358,15 +358,9 @@ public class gui extends JFrame {
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
 					ArrayList<String> planelist = new ArrayList<>();
-
-
-					for (int i = 0; i < availableplanes.size(); i++) {
-						
+				
 						availableplanes.removeAllElements();
-					}
-					
-					
-					
+						
 					for (int i=0; i < returnplanes.length; i++) {
 								
 						availableplanes.addElement(returnplanes[i]);
@@ -390,11 +384,7 @@ public class gui extends JFrame {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
 					ArrayList<String> planelist = new ArrayList<>();
 					
-					for (int i = 0; i < availableplanes.size(); i++) {
-						
 						availableplanes.removeAllElements();
-					}					
-					
 							
 					for (int i=0; i < returnplanes.length; i++) {
 								
@@ -427,12 +417,8 @@ public class gui extends JFrame {
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
 					ArrayList<String> planelist = new ArrayList<>();
-							
-					for (int i = 0; i < availableplanes.size(); i++) {
 						
 						availableplanes.removeAllElements();
-					}
-					
 					
 					for (int i=0; i < returnplanes.length; i++) {
 								
