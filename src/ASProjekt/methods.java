@@ -116,7 +116,10 @@ public class methods {
 
 	public static void addplane(String plane){
 		
-		//TODO: Muss verhindern, das "" eingegeben werden kann.
+		if (plane.equals("")) {
+			System.out.println("Err: Kein Name angegeben. Bitte geben sie den neuen Flugzeug-Namen an.");
+			return;
+		}
 		
 		String planes[]=read_write.lesen("planes.txt");
 		int temp = 0;
@@ -173,6 +176,26 @@ public class methods {
 		//von und bis kommen als yy:zz an, benötigt wird xx:yy:zz
 		von=von + ":00";
 		bis=bis + ":00";
+		
+		if ((von.equals(":00")) || (plane.equals("null")) || (bis.equals(":00")) || (datum.equals("")) || (name.equals(""))) {
+			
+			if (plane.equals("null")) {
+				System.out.println("Err: Kein Flugzeug ausgewählt. Bitte wählen sie ein Flugzeug aus.");
+			}
+			if (von.equals(":00")) {
+				System.out.println("Err: \"Von\" nicht definiert. Bitte wählen sie eine Zeit für \"Von\" aus.");			
+			}
+			if (bis.equals(":00")) {
+				System.out.println("Err: \"Bis\" nicht definiert. Bitte wählen sie eine Zeit für \"Bis\" aus.");
+			}
+			if (datum.equals("")) {
+				System.out.println("Err: Kein Datum angegeben. Bitte geben sie ein Datum an.");
+			}
+			if (name.equals("")) {
+				System.out.println("Err: Kein Name angegeben. Bitte geben sie einen Namen für die Buchung an (e.g. den Familiennamen)");
+			}
+			return;
+		}
 		
 		
 		//Array wird für alte Daten erstellt

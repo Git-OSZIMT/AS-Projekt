@@ -357,7 +357,6 @@ public class gui extends JFrame {
 				LocalTime time = timepick_von.getTime();
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-					ArrayList<String> planelist = new ArrayList<>();
 				
 						availableplanes.removeAllElements();
 						
@@ -368,12 +367,6 @@ public class gui extends JFrame {
 								
 					}
 							
-					boolean exists=true;
-						while(exists == true) {
-							exists = availableplanes.removeElement(null);
-							}
-							
-							System.out.println(planelist);
 						}	
 				}
 			});
@@ -382,7 +375,6 @@ public class gui extends JFrame {
 		public void timeChanged(TimeChangeEvent event) {
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-					ArrayList<String> planelist = new ArrayList<>();
 					
 						availableplanes.removeAllElements();
 							
@@ -393,12 +385,6 @@ public class gui extends JFrame {
 								
 					}
 							
-					boolean exists=true;
-							
-					while(exists == true) {
-					exists = availableplanes.removeElement(null);
-					}					
-					System.out.println(planelist);
 							
 					//planelist ist eine ArrayList die alles enthält was angezeigt werden soll.
 							
@@ -416,7 +402,6 @@ public class gui extends JFrame {
 		public void dateChanged(DateChangeEvent event) {
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-					ArrayList<String> planelist = new ArrayList<>();
 						
 						availableplanes.removeAllElements();
 					
@@ -427,12 +412,6 @@ public class gui extends JFrame {
 								
 					}
 							
-					boolean exists=true;
-					while(exists == true) {
-					exists = availableplanes.removeElement(null);
-					}
-
-					System.out.println(planelist);
 							
 					}
 				}
