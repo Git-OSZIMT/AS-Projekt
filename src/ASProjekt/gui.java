@@ -540,26 +540,26 @@ public class gui extends JFrame implements ActionListener {
 		sl_manage.putConstraint(SpringLayout.WEST, lblFlugzeugUmbennenen, 54, SpringLayout.EAST, saved_planes);
 		manage.add(lblFlugzeugUmbennenen);
 		
-		t=new Timer(40,new ActionListener() {
+		t=new Timer(10,new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub				
-				if(animpos == false) {
+				if(animpos == false) { 
 					
-					lbl_starterror.setLocation(0,pixel+613);
-					pixel=pixel-1;
-					System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: false");
-					if(pixel == -60) {
-						t.setDelay(2500);
-						System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: Übergang");
-						animpos=true;
+					lbl_starterror.setLocation(0,pixel+613); //Verschiebt Label ,keine Ahnung warum da 613 steht. Vermutung: Das Fenster ist so groß
+					pixel=pixel-1; //Wenn ich mit 613 = Fenstergröße richtig liege bedeutet das ebend das das Label immer 1 Pixel nach oben verschoben wird
+					System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: false"); //Debug
+					if(pixel == -60) { //Das Label ist 60 pixel hoch. Wenn es also 60 Pixel nach oben verschoben wurde ist es komplett sichtbar.
+						t.setDelay(2500); // Die Animation stoppt für 2,5 Sekunden (Nutzer soll lesen)
+						System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: Übergang"); //Debug
+						animpos=true;//Variable symbolosiert : Label oben und sichtbar.
 					}
 				}else {
-					t.setDelay(2);
+					t.setDelay(1);//2ms Timing sollten das Label schnell verschwinden lassen.
 					System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: true");
 					lbl_starterror.setLocation(0,pixel+613);
-					pixel++;
-					if(pixel==0) {
-					t.stop();
+					pixel++; //hier eventuell pixel = pixel +2 für schnelleres verschwinden. 
+					if(pixel==5) { //Wenn 0 dann komplett verschwunden (Eigentlich, da das irgendwie nicht stimmt zur sicherheit 5)
+					t.stop(); //timer wird gestoppt Preozess abgeschlossen.
 					//animpos=false;
 					}
 				}
@@ -569,14 +569,14 @@ public class gui extends JFrame implements ActionListener {
 		
 	}//END of GUI Class
 	
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) { //Allgemeiner ActionListener, lauscht auf alles was passiert
 		// TODO Auto-generated method stub
 		
-		if(e.getSource() == btn_test){  
+		if(e.getSource() == btn_test){  //sagt dem Actionlister das er was tun soll wenn die Quelle der Action btn_test ist.
 			System.out.println("Timer startet");
-			t.setDelay(5);
-			animpos=false;
-			pixel=0;
+			t.setDelay(5);	//alle 5ms läuft der Timer einmal ab 
+			animpos=false; //animpos gibt an ob das label sichtbar ist oder nicht ( false= versteckt)
+			pixel=0;		//Anfangswert
 			t.start();//GOES TO t=new Timer
 	}
 	}
