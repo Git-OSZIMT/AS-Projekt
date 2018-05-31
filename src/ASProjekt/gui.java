@@ -168,7 +168,9 @@ public class gui extends JFrame implements ActionListener {
 		for(int i=0; i<planes.length; i++){
 	    	listenModell.addElement(planes[i]);
 	    }
-	    
+	    DefaultListModel availableplanes = new DefaultListModel();
+
+		
 	    
 		//ENDE LIST MODELL
 		
@@ -291,7 +293,7 @@ public class gui extends JFrame implements ActionListener {
 		sl_create.putConstraint(SpringLayout.EAST, timepick_bis, 774, SpringLayout.WEST, create);
 		create.add(timepick_bis);
 				
-		JList lst_leihemoeglich = new JList(listenModell);
+		JList lst_leihemoeglich = new JList(availableplanes);
 		lst_leihemoeglich.setBorder(new LineBorder(new Color(0, 0, 0)));
 		sl_create.putConstraint(SpringLayout.NORTH, lst_leihemoeglich, 35, SpringLayout.SOUTH, datepick);
 		sl_create.putConstraint(SpringLayout.WEST, lst_leihemoeglich, 0, SpringLayout.WEST, datepick);
@@ -305,9 +307,35 @@ public class gui extends JFrame implements ActionListener {
 		sl_create.putConstraint(SpringLayout.EAST, btn_addleihe, 248, SpringLayout.EAST, timepick_von);
 		btn_addleihe.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
+<<<<<<< HEAD
 					
 						methods.addleihe((String) lst_leihemoeglich.getSelectedValue(),timepick_von.getTimeStringOrEmptyString(),timepick_bis.getTimeStringOrEmptyString() ,datepick.getDateStringOrEmptyString(), txt_name.getText());
 						//(plane, von, bis, datum, name);
+=======
+				
+				
+			
+				String plane = String.valueOf(lst_leihemoeglich.getSelectedValue());
+				String von = timepick_von.getTimeStringOrEmptyString();
+				String bis = timepick_bis.getTimeStringOrEmptyString();
+				String datum = datepick.getDateStringOrEmptyString();
+				String name = textField.getText();	
+				
+				/*
+				//Debug-Möglichkeit (Console Output der Benötigten Variablen und ihrem Inhalt (On-Click))
+				
+				System.out.print("Plane: "+plane+"\n");
+				System.out.print("Von: "+von+"\n");
+				System.out.print("Bis: "+bis+"\n");
+				System.out.print("Datum: "+datum+"\n");
+				System.out.print("Name: "+name+"\n");
+				*/
+
+				
+				methods.addleihe(plane, von, bis, datum, name);
+				
+				
+>>>>>>> refs/remotes/AS-Projekt/master
 			}
 		});
 		create.add(btn_addleihe);
@@ -361,21 +389,16 @@ public class gui extends JFrame implements ActionListener {
 				LocalTime time = timepick_von.getTime();
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-					ArrayList<String> planelist = new ArrayList<>();
-					
+				
+						availableplanes.removeAllElements();
+						
 					for (int i=0; i < returnplanes.length; i++) {
 								
-						planelist.add(returnplanes[i]);
+						availableplanes.addElement(returnplanes[i]);
 								
 								
 					}
 							
-					boolean exists=true;
-						while(exists == true) {
-							exists = planelist.remove(null);
-							}
-							
-							System.out.println(planelist);
 						}	
 				}
 			});
@@ -384,22 +407,16 @@ public class gui extends JFrame implements ActionListener {
 		public void timeChanged(TimeChangeEvent event) {
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-					ArrayList<String> planelist = new ArrayList<>();
-							
+					
+						availableplanes.removeAllElements();
 							
 					for (int i=0; i < returnplanes.length; i++) {
 								
-					planelist.add(returnplanes[i]);
+						availableplanes.addElement(returnplanes[i]);
 								
 								
 					}
 							
-					boolean exists=true;
-							
-					while(exists == true) {
-					exists = planelist.remove(null);
-					}					
-					System.out.println(planelist);
 							
 					//planelist ist eine ArrayList die alles enthält was angezeigt werden soll.
 							
@@ -417,21 +434,16 @@ public class gui extends JFrame implements ActionListener {
 		public void dateChanged(DateChangeEvent event) {
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-					ArrayList<String> planelist = new ArrayList<>();
-							
+						
+						availableplanes.removeAllElements();
+					
 					for (int i=0; i < returnplanes.length; i++) {
 								
-						planelist.add(returnplanes[i]);
+						availableplanes.addElement(returnplanes[i]);
 								
 								
 					}
 							
-					boolean exists=true;
-					while(exists == true) {
-					exists = planelist.remove(null);
-					}
-
-					System.out.println(planelist);
 							
 					}
 				}
