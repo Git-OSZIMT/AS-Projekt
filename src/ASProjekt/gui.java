@@ -308,12 +308,6 @@ public class gui extends JFrame implements ActionListener {
 		btn_addleihe.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 					
-						methods.addleihe((String) lst_leihemoeglich.getSelectedValue(),timepick_von.getTimeStringOrEmptyString(),timepick_bis.getTimeStringOrEmptyString() ,datepick.getDateStringOrEmptyString(), txt_name.getText());
-						//(plane, von, bis, datum, name);
-
-				
-				
-			
 				String plane = String.valueOf(lst_leihemoeglich.getSelectedValue());
 				String von = timepick_von.getTimeStringOrEmptyString();
 				String bis = timepick_bis.getTimeStringOrEmptyString();
