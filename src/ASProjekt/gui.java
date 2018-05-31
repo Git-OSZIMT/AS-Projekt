@@ -30,6 +30,8 @@ import javax.swing.DefaultListSelectionModel;
 import javax.swing.ImageIcon;
 import java.awt.Dimension;
 import javax.swing.SpringLayout;
+import javax.swing.Timer;
+
 import java.awt.Rectangle;
 import java.awt.Component;
 import java.awt.Toolkit;
@@ -68,7 +70,7 @@ class timeveto implements TimeVetoPolicy {
 
 
 @SuppressWarnings({ "serial", "unused" })
-public class gui extends JFrame {
+public class gui extends JFrame implements ActionListener {
 	private static JPanel contentNew;
 	private JTextField txt_einnahmen;
 	private JTextField txt_planeadd;
@@ -76,7 +78,15 @@ public class gui extends JFrame {
 	private JTextField txt_name;
 	private JTextField txt_freivon;
 	private JTextField txt_freibis;
-
+	private Object TimerTask;
+	JButton btn_test;
+	JLabel  lbl_starterror;
+	JPanel start;
+	SpringLayout sl_start;
+	Integer pixel=0;
+	Boolean animpos=false;
+	
+	Timer t;
 	
 	/**
 	 * Launch the application.
@@ -200,6 +210,22 @@ public class gui extends JFrame {
 		sl_start.putConstraint(SpringLayout.EAST, txt_einnahmen, -577, SpringLayout.EAST, start);
 		start.add(txt_einnahmen);
 		txt_einnahmen.setColumns(10);
+		
+		
+		lbl_starterror = new JLabel("");
+		sl_start.putConstraint(SpringLayout.NORTH, lbl_starterror, 1, SpringLayout.SOUTH, start);
+		sl_start.putConstraint(SpringLayout.WEST, lbl_starterror, 0, SpringLayout.WEST, start);
+		sl_start.putConstraint(SpringLayout.EAST, lbl_starterror, 0, SpringLayout.EAST, lbl_logo);
+		Image error1 = new ImageIcon(this.getClass().getResource("/error_datum.png")).getImage();
+		lbl_starterror.setIcon(new ImageIcon(error1));
+		start.add(lbl_starterror);
+	
+		
+		btn_test = new JButton("New button");
+		sl_start.putConstraint(SpringLayout.NORTH, btn_test, 65, SpringLayout.NORTH, start);
+		sl_start.putConstraint(SpringLayout.EAST, btn_test, -106, SpringLayout.WEST, lbl_logo);
+		start.add(btn_test);
+		btn_test.addActionListener(this);
 		
 		
 		TimePickerSettings timeSettings = new TimePickerSettings();
@@ -510,5 +536,47 @@ public class gui extends JFrame {
 		lblFlugzeugUmbennenen.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		sl_manage.putConstraint(SpringLayout.WEST, lblFlugzeugUmbennenen, 54, SpringLayout.EAST, saved_planes);
 		manage.add(lblFlugzeugUmbennenen);
+		
+		t=new Timer(40,new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub				
+				if(animpos == false) {
+					
+					lbl_starterror.setLocation(0,pixel+613);
+					pixel=pixel-1;
+					System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: false");
+					if(pixel == -60) {
+						t.setDelay(2500);
+						System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: Übergang");
+						animpos=true;
+					}
+				}else {
+					t.setDelay(2);
+					System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: true");
+					lbl_starterror.setLocation(0,pixel+613);
+					pixel++;
+					if(pixel==0) {
+					t.stop();
+					//animpos=false;
+					}
+				}
+	
+			}
+		});
+		
+	}//END of GUI Class
+	
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+		if(e.getSource() == btn_test){  
+			System.out.println("Timer startet");
+			t.setDelay(5);
+			animpos=false;
+			pixel=0;
+			t.start();//GOES TO t=new Timer
 	}
+	}
+	
+	
 }
