@@ -307,11 +307,10 @@ public class gui extends JFrame implements ActionListener {
 		sl_create.putConstraint(SpringLayout.EAST, btn_addleihe, 248, SpringLayout.EAST, timepick_von);
 		btn_addleihe.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
-<<<<<<< HEAD
 					
 						methods.addleihe((String) lst_leihemoeglich.getSelectedValue(),timepick_von.getTimeStringOrEmptyString(),timepick_bis.getTimeStringOrEmptyString() ,datepick.getDateStringOrEmptyString(), txt_name.getText());
 						//(plane, von, bis, datum, name);
-=======
+
 				
 				
 			
@@ -319,7 +318,7 @@ public class gui extends JFrame implements ActionListener {
 				String von = timepick_von.getTimeStringOrEmptyString();
 				String bis = timepick_bis.getTimeStringOrEmptyString();
 				String datum = datepick.getDateStringOrEmptyString();
-				String name = textField.getText();	
+				String name = txt_name.getText();	
 				
 				/*
 				//Debug-Möglichkeit (Console Output der Benötigten Variablen und ihrem Inhalt (On-Click))
@@ -334,8 +333,6 @@ public class gui extends JFrame implements ActionListener {
 				
 				methods.addleihe(plane, von, bis, datum, name);
 				
-				
->>>>>>> refs/remotes/AS-Projekt/master
 			}
 		});
 		create.add(btn_addleihe);
