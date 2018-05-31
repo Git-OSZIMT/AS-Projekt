@@ -1,5 +1,5 @@
 package ASProjekt;
-
+//"Von Wann bis Wann sind die Verfügbaren Maschienen frei"
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -73,7 +73,7 @@ public class gui extends JFrame {
 	private JTextField txt_einnahmen;
 	private JTextField txt_planeadd;
 	private JTextField txt_rename;
-	private JTextField textField;
+	private JTextField txt_name;
 	private JTextField txt_freivon;
 	private JTextField txt_freibis;
 
@@ -280,8 +280,8 @@ public class gui extends JFrame {
 		btn_addleihe.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 					
-						//methods.addleihe(plane, von, bis, datum, name);
-						
+						methods.addleihe((String) lst_leihemoeglich.getSelectedValue(),timepick_von.getTimeStringOrEmptyString(),timepick_bis.getTimeStringOrEmptyString() ,datepick.getDateStringOrEmptyString(), txt_name.getText());
+						//(plane, von, bis, datum, name);
 			}
 		});
 		create.add(btn_addleihe);
@@ -291,14 +291,14 @@ public class gui extends JFrame {
 		sl_create.putConstraint(SpringLayout.WEST, lblBuchungAufName, 0, SpringLayout.WEST, lblBis);
 		create.add(lblBuchungAufName);
 				
-		textField = new JTextField();
-		sl_create.putConstraint(SpringLayout.NORTH, btn_addleihe, 189, SpringLayout.SOUTH, textField);
-		sl_create.putConstraint(SpringLayout.NORTH, textField, 6, SpringLayout.SOUTH, lblBuchungAufName);
-		sl_create.putConstraint(SpringLayout.WEST, textField, 0, SpringLayout.WEST, lblBis);
-		sl_create.putConstraint(SpringLayout.SOUTH, textField, -395, SpringLayout.SOUTH, create);
-		sl_create.putConstraint(SpringLayout.EAST, textField, 248, SpringLayout.EAST, timepick_von);
-		create.add(textField);
-		textField.setColumns(10);
+		txt_name = new JTextField();
+		sl_create.putConstraint(SpringLayout.NORTH, btn_addleihe, 189, SpringLayout.SOUTH, txt_name);
+		sl_create.putConstraint(SpringLayout.NORTH, txt_name, 6, SpringLayout.SOUTH, lblBuchungAufName);
+		sl_create.putConstraint(SpringLayout.WEST, txt_name, 0, SpringLayout.WEST, lblBis);
+		sl_create.putConstraint(SpringLayout.SOUTH, txt_name, -395, SpringLayout.SOUTH, create);
+		sl_create.putConstraint(SpringLayout.EAST, txt_name, 248, SpringLayout.EAST, timepick_von);
+		create.add(txt_name);
+		txt_name.setColumns(10);
 				
 		JLabel lblFreiVon = new JLabel("Frei Von :");
 		sl_create.putConstraint(SpringLayout.NORTH, lblFreiVon, 0, SpringLayout.NORTH, lst_leihemoeglich);
@@ -306,9 +306,9 @@ public class gui extends JFrame {
 		create.add(lblFreiVon);
 				
 		txt_freivon = new JTextField();
-		sl_create.putConstraint(SpringLayout.NORTH, txt_freivon, 0, SpringLayout.NORTH, textField);
+		sl_create.putConstraint(SpringLayout.NORTH, txt_freivon, 0, SpringLayout.NORTH, txt_name);
 		sl_create.putConstraint(SpringLayout.WEST, txt_freivon, 41, SpringLayout.EAST, lst_leihemoeglich);
-		sl_create.putConstraint(SpringLayout.SOUTH, txt_freivon, 0, SpringLayout.SOUTH, textField);
+		sl_create.putConstraint(SpringLayout.SOUTH, txt_freivon, 0, SpringLayout.SOUTH, txt_name);
 		sl_create.putConstraint(SpringLayout.EAST, txt_freivon, 0, SpringLayout.EAST, timepick_von);
 		create.add(txt_freivon);
 		txt_freivon.setColumns(10);
