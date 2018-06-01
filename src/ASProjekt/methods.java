@@ -1,6 +1,8 @@
 package ASProjekt;
 
+import java.io.File;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import ASProjekt.read_write;
 
@@ -144,7 +146,7 @@ public class methods {
 	}
 	
 	public static void removeplane(int id) {
-		//TODO: Überarbeiten
+
 		
 		String planes[]=read_write.lesen("planes.txt");
 		int size = planes.length;
@@ -224,5 +226,7 @@ public class methods {
 		
 	}
 
+
+	
 	
 }

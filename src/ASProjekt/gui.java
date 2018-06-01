@@ -136,7 +136,8 @@ public class gui extends JFrame implements ActionListener {
 	}catch(ArrayIndexOutOfBoundsException exception){
 		
 		//Hier soll Unexcepted Error erscheinen.
-		
+		lbl_starterror.setIcon(new ImageIcon(error1));
+		t.start();
 		
 
 	}
@@ -546,8 +547,7 @@ public class gui extends JFrame implements ActionListener {
 		manage.add(lblFlugzeugUmbennenen);
 		
 		t=new Timer(10,new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub				
+			public void actionPerformed(ActionEvent e) {				
 				if(animpos == false) { 
 					
 					lbl_starterror.setLocation(0,pixel+613); //Verschiebt Label ,keine Ahnung warum da 613 steht. Vermutung: Das Fenster ist so groﬂ
@@ -575,7 +575,6 @@ public class gui extends JFrame implements ActionListener {
 	}//END of GUI Class
 	
 	public void actionPerformed(ActionEvent e) { //Allgemeiner ActionListener, lauscht auf alles was passiert
-		// TODO Auto-generated method stub
 		
 		if(e.getSource() == btn_test){  //sagt dem Actionlister das er was tun soll wenn die Quelle der Action btn_test ist.
 			System.out.println("Timer startet");
