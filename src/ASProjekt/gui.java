@@ -82,19 +82,29 @@ public class gui extends JFrame implements ActionListener {
 	private Object TimerTask;
 	JButton btn_test;
 	static JLabel  lbl_starterror;
+	static JLabel lbl_newerror;
 	JPanel start;
 	SpringLayout sl_start;
-	Integer pixel=0;
-	Boolean animpos=false;
+	static Integer pixel=0;
+	static Boolean animpos=false;
+	static String g_imagename;
+	
 	Image error1 = new ImageIcon(this.getClass().getResource("/error_unknown.png")).getImage();
 	Image beginn_gleich_ende = new ImageIcon(this.getClass().getResource("/beginn_gleich_ende.png")).getImage();
 	Image datum_vergangenheit = new ImageIcon(this.getClass().getResource("/datum_vergangenheit.png")).getImage();
 	Image ende_vor_beginn = new ImageIcon(this.getClass().getResource("/ende_vor_beginn.png")).getImage();
 	
-	Timer t;
+	/*
+	static Image error1;
+	static Image beginn_gleich_ende;
+	static Image datum_vergangenheit;
+	static Image ende_vor_beginn;
+	*/
+	
+	static Timer t;
 	
 	/**
-	 * Launch the application.
+	 * Launch the application. 
 	 * @throws UnsupportedLookAndFeelException 
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
@@ -125,7 +135,6 @@ public class gui extends JFrame implements ActionListener {
 		
 		setResizable(false);
 		
-		
 	
 		String datas[] = {};
 		String planes[] = {};
@@ -145,11 +154,12 @@ public class gui extends JFrame implements ActionListener {
 
 	}
 		
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(gui.class.getResource("/com/jgoodies/looks/windows/icons/Computer.gif")));
 		setFont(new Font("Times New Roman", Font.PLAIN, 10));
 		setTitle("Buchungs Verwaltung");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 839, 709);
+		setBounds(100, 100, 815, 709);
 		SpringLayout springLayout = new SpringLayout();
 		getContentPane().setLayout(springLayout);
 		
@@ -231,14 +241,6 @@ public class gui extends JFrame implements ActionListener {
 		sl_start.putConstraint(SpringLayout.EAST, txt_einnahmen, -577, SpringLayout.EAST, start);
 		start.add(txt_einnahmen);
 		txt_einnahmen.setColumns(10);
-		
-		
-		lbl_starterror = new JLabel("");
-		sl_start.putConstraint(SpringLayout.NORTH, lbl_starterror, 1, SpringLayout.SOUTH, start);
-		sl_start.putConstraint(SpringLayout.WEST, lbl_starterror, 0, SpringLayout.WEST, start);
-		sl_start.putConstraint(SpringLayout.EAST, lbl_starterror, 0, SpringLayout.EAST, lbl_logo);
-		lbl_starterror.setIcon(new ImageIcon(error1));
-		start.add(lbl_starterror);
 	
 		
 		btn_test = new JButton("New button");
@@ -356,6 +358,9 @@ public class gui extends JFrame implements ActionListener {
 					lst_occupiedplanes.removeElement(null);
 				}
 				
+				//aktuallisieren der "Heutigen Einnahmen" bei neuer Leihe
+				
+				txt_einnahmen.setText(String.valueOf(methods.earningstoday(read_write.lesen("data.txt")))+ "€");
 			}
 		});
 		create.add(btn_addleihe);
@@ -399,6 +404,13 @@ public class gui extends JFrame implements ActionListener {
 		sl_create.putConstraint(SpringLayout.SOUTH, lblNewLabel_1, -353, SpringLayout.SOUTH, create);
 		sl_create.putConstraint(SpringLayout.WEST, lblNewLabel_1, 0, SpringLayout.WEST, timepick_von);
 		create.add(lblNewLabel_1);
+		
+		lbl_newerror = new JLabel("");
+		sl_create.putConstraint(SpringLayout.NORTH, lbl_newerror, 5, SpringLayout.SOUTH, create);
+		sl_create.putConstraint(SpringLayout.EAST, lbl_newerror, 0, SpringLayout.EAST, create);
+		create.add(lbl_newerror);
+		sl_create.putConstraint(SpringLayout.WEST, lbl_newerror, 0, SpringLayout.WEST, create);
+		lbl_newerror.setIcon(new ImageIcon(error1));
 				
 				
 				
@@ -569,24 +581,62 @@ public class gui extends JFrame implements ActionListener {
 		sl_manage.putConstraint(SpringLayout.WEST, lblFlugzeugUmbennenen, 54, SpringLayout.EAST, saved_planes);
 		manage.add(lblFlugzeugUmbennenen);
 		
+		
+		lbl_starterror = new JLabel("");
+		sl_start.putConstraint(SpringLayout.NORTH, lbl_starterror, 5, SpringLayout.SOUTH, start);
+		sl_start.putConstraint(SpringLayout.EAST, lbl_starterror, 0, SpringLayout.EAST, start);
+		start.add(lbl_starterror);
+		sl_start.putConstraint(SpringLayout.WEST, lbl_starterror, 0, SpringLayout.WEST, start);
+		lbl_starterror.setIcon(new ImageIcon(error1));
+		
+		
+
+		//Methode zeigt heutige Einnahmen.
+		txt_einnahmen.setText(String.valueOf(methods.earningstoday(datas))+ "€");
+		
+		
 		t=new Timer(10,new ActionListener() {
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {
+					
+				if (g_imagename.equals("beginn_gleich_ende")) {
+					lbl_starterror.setIcon(new ImageIcon (beginn_gleich_ende));
+					lbl_newerror.setIcon(new ImageIcon (beginn_gleich_ende));
+				}
+				
+				if (g_imagename.equals("error1")) {
+					lbl_starterror.setIcon(new ImageIcon (error1));
+					lbl_newerror.setIcon(new ImageIcon (error1));
+				}
+				
+				if (g_imagename.equals("datum_vergangenheit")) {
+					lbl_starterror.setIcon(new ImageIcon (datum_vergangenheit));
+					lbl_newerror.setIcon(new ImageIcon (datum_vergangenheit));
+				}
+				
+				if (g_imagename.equals("ende_vor_beginn")) {
+					lbl_starterror.setIcon(new ImageIcon (ende_vor_beginn));
+					lbl_newerror.setIcon(new ImageIcon (ende_vor_beginn));
+				}
+					
+					
 				if(animpos == false) { 
 					
 					lbl_starterror.setLocation(0,pixel+613); //Verschiebt Label ,keine Ahnung warum da 613 steht. Vermutung: Das Fenster ist so groß
+					lbl_newerror.setLocation(0,pixel+613);
 					pixel=pixel-1; //Wenn ich mit 613 = Fenstergröße richtig liege bedeutet das ebend das das Label immer 1 Pixel nach oben verschoben wird
-					System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: false"); //Debug
+				//	System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: false"); //Debug
 					if(pixel == -60) { //Das Label ist 60 pixel hoch. Wenn es also 60 Pixel nach oben verschoben wurde ist es komplett sichtbar.
 						t.setDelay(2500); // Die Animation stoppt für 2,5 Sekunden (Nutzer soll lesen)
-						System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: Übergang"); //Debug
+				//		System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: Übergang"); //Debug
 						animpos=true;//Variable symbolosiert : Label oben und sichtbar.
 					}
 				}else {
 					t.setDelay(1);//2ms Timing sollten das Label schnell verschwinden lassen.
-					System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: true");
+				//	System.out.println("X:"+ pixel +" Delay:" + t.getDelay()+ " Bereich: true");
 					lbl_starterror.setLocation(0,pixel+613);
+					lbl_newerror.setLocation(0,pixel+613);
 					pixel++; //hier eventuell pixel = pixel +2 für schnelleres verschwinden. 
-					if(pixel==5) { //Wenn 0 dann komplett verschwunden (Eigentlich, da das irgendwie nicht stimmt zur sicherheit 5)
+					if(pixel > 5) { //Wenn 0 dann komplett verschwunden (Eigentlich, da das irgendwie nicht stimmt zur sicherheit 5)
 					t.stop(); //timer wird gestoppt Preozess abgeschlossen.
 					//animpos=false;
 					}
@@ -600,7 +650,7 @@ public class gui extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) { //Allgemeiner ActionListener, lauscht auf alles was passiert
 		
 		if(e.getSource() == btn_test){  //sagt dem Actionlister das er was tun soll wenn die Quelle der Action btn_test ist.
-			System.out.println("Timer startet");
+		//	System.out.println("Timer startet");
 			t.setDelay(5);	//alle 5ms läuft der Timer einmal ab 
 			animpos=false; //animpos gibt an ob das label sichtbar ist oder nicht ( false= versteckt)
 			pixel=0;		//Anfangswert
@@ -609,7 +659,14 @@ public class gui extends JFrame implements ActionListener {
 	}
 	
 	public static void setlabelimage (String imagename) {
-		lbl_starterror.setIcon(new ImageIcon(imagename));
+		g_imagename = imagename;
+	//	lbl_starterror.setIcon(new ImageIcon(imagename));
+	//	lbl_newerror.setIcon(new ImageIcon(imagename));
+	//	System.out.println("Timer startet");
+		t.setDelay(5);	//alle 5ms läuft der Timer einmal ab 
+		animpos=false; //animpos gibt an ob das label sichtbar ist oder nicht ( false= versteckt)
+		pixel=0;		//Anfangswert
+		t.start();//GOES TO t=new Timer
 		
 	}
 	

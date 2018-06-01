@@ -23,13 +23,13 @@ public class methods {
 	
 	//checkavailable gibt erfolgreich eine Liste von freien Flugzeugen zurück !
 	public static String[] checkavailable(String datum, String von, String bis, String[] datas, String[] planes) {
-		System.out.println("Checkvalid gestartet");
+		//System.out.println("Checkvalid gestartet");
 		//von und bis kommen als yy:zz an, benötigt wird xx:yy:zz
 		von=von + ":00";
 		Integer von_hour = Integer.valueOf(von.substring(0, 2));
-		System.out.println("von_hour = " + von_hour);
+		//System.out.println("von_hour = " + von_hour);
 		Integer bis_hour = Integer.valueOf(bis.substring(0, 2));
-		System.out.println("bis_hour =" + bis_hour);
+		//System.out.println("bis_hour =" + bis_hour);
 		bis=bis + ":00";
 		
 		
@@ -52,23 +52,32 @@ public class methods {
 		
 		}
 		
-		System.out.println(von_hour);
-		System.out.println(bis_hour);
-		//TODO : If Abfragen so integrieren das routine abbricht wenn ungültig. Am besten mit allen anderen Checks ein Boolean auf false setzen. Und dann eine IF für die ganze routine
-		if (von_hour > bis_hour || von_hour == bis_hour) {
+		//System.out.println(von_hour);
+		//System.out.println(bis_hour);
+	
+		
+		String today = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+		
+		System.out.println(today + datum);
+		
+		if (von_hour > bis_hour || von_hour == bis_hour || today.compareTo(datum)>0) {
 			//Hier erstmal FEHLER !
 			if (von_hour ==bis_hour) {
-				System.out.println("Leihe muss mindestens eine Stunde gehen");
+			//	System.out.println("Leihe muss mindestens eine Stunde gehen");
 				gui.setlabelimage("beginn_gleich_ende");
 			}
 			if (von_hour > bis_hour) {
-				System.out.println("Leihe kann nicht mit einer früheren Uhrzeit enden, als sie startet.");
+			//	System.out.println("Leihe kann nicht mit einer früheren Uhrzeit enden, als sie startet.");
 				gui.setlabelimage("ende_vor_beginn");
+			}
+			if (today.compareTo(datum)>0) {
+			//	System.out.println("Datum liegt in der Vergangenheit.");
+				gui.setlabelimage("datum_vergangenheit");
 			}
 			
 		}else {
 					
-			System.out.println("Alles OK!");
+			//System.out.println("Alles OK!");
 			
 			
 			for (int i=0; i < datas2.length; i++) {
@@ -80,7 +89,7 @@ public class methods {
 						
 						
 						
-						System.out.println("Datum Check : gefunden");
+					//	System.out.println("Datum Check : gefunden");
 
 						LocalTime start = LocalTime.parse( datas2[i][3] );  //gespeichertes von
 						LocalTime stop = LocalTime.parse( datas2[i][4] );	  //gespeichertes bis
@@ -92,18 +101,18 @@ public class methods {
 								
 							}
 							
-							System.out.println("Zeit " + time);
+					//		System.out.println("Zeit " + time);
 							
 							if (Boolean.FALSE.equals(ischecknotvalid)) {
 								LocalTime check = LocalTime.parse( time ); //Variable die alle Zeiten zwischen von und bis abfragt
 								ischecknotvalid = ( check.isAfter( start ) && check.isBefore( stop ) ) ;	
 							}		
 							
-							System.out.println("Ergebnis des Checks : " + ischecknotvalid);
+					//		System.out.println("Ergebnis des Checks : " + ischecknotvalid);
 							
 						}
 						
-						System.out.println("Leihe gültig? (True = ungültig) " + ischecknotvalid);
+				//		System.out.println("Leihe gültig? (True = ungültig) " + ischecknotvalid);
 						
 						if (Boolean.TRUE.equals(ischecknotvalid)) { 
 												
@@ -120,7 +129,7 @@ public class methods {
 				
 				for (int y=0; y < planes.length ; y++) {
 					
-					System.out.println("Rückgabe von checkavailable: " + planes[y]);
+			//		System.out.println("Rückgabe von checkavailable: " + planes[y]);
 					
 					}
 			
@@ -150,7 +159,7 @@ public class methods {
 		for (int i=0; i < planes.length; i++) {
 
 			planes1[i]=planes[i];			
-			System.out.println(planes1[i]);
+			//System.out.println(planes1[i]);
 		}	
 		
 		//Planes [temp - 1] = letzter eintrag von dem original Array
@@ -158,7 +167,7 @@ public class methods {
 		planes1[temp -1]=plane;
 		
 		read_write.schreiben(planes1, "planes.txt");
-		System.out.println("Neues Flugzeug hinzugefügt");
+		//System.out.println("Neues Flugzeug hinzugefügt");
 		temp=0;
 		
 		
@@ -186,14 +195,14 @@ public class methods {
 	
 	public static void renameplane(int id, String name) {
 		String[] planes=read_write.lesen("planes.txt");
-		System.out.println(id + "ist id");
+		//System.out.println(id + "ist id");
 		planes[id]=name;
 		read_write.schreiben(planes, "planes.txt");
 	}
 	
 	public static void addleihe(String plane, String von, String bis, String datum, String name) {
 		
-		System.out.println("addleihe gestartet");
+		//System.out.println("addleihe gestartet");
 		//von und bis kommen als yy:zz an, benötigt wird xx:yy:zz
 		von=von + ":00";
 		bis=bis + ":00";
@@ -245,12 +254,14 @@ public class methods {
 		
 	}
 
-	public static int earningstoday(String[] datas, String datum) {
+	public static float earningstoday(String[] datas) {
 		//Datas = data.txt Arrays
 		int diffg=0;
+		float sum=0; 
 		//Muss herausfinden wieviel Differenz an Stunden insgesamt vorhanden sind
 		//Von ist feld 1 , Bis Feld 2
 		
+		String datum = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 		
 		//Eindimensionales Array in Multidimensionales Array
 				String datas2[][] = new String[datas.length][6];
@@ -270,14 +281,13 @@ public class methods {
 				
 				}
 		
-		
-		//TODO Heute rausfiltern
-
+				
 				for (int i=0; i < datas2.length; i++) {
 					
-					if (datas2[i][2] == datum) {
+					
+					if (datas2[i][2].contentEquals(datum)) {
+					//	System.out.println("HEUTE GEFUNDEN!");
 					//Array in "I" und "2" - "I" und "1" = dauer dieser Leihe
-					//TODO DIESE METHODE MUSS FAILEN ! Es wird 18:00 - 13:00 gerechnet. Beides muss gekürzt werden zu "18" und "13".
 					//Strings bekommen Urzeit (zb. 16:00)
 					String temp1=datas2[i][3];
 					String temp2=datas2[i][4];
@@ -287,18 +297,16 @@ public class methods {
 					String[] temp2_1 = temp2.split(":");
 					temp2=temp2_1[0];
 					
-					System.out.println(temp1 + "tmp1");
-					System.out.println(temp2 + "tmp2");
 					
 					int diffz= Integer.valueOf(temp2) - Integer.valueOf(temp1);
 					//Adddiert die einzelnen Stunden
 					diffg= diffg + diffz;
-						
+					sum=diffg*60;
 					}	
 					
 				}
 				
-		return diffg;
+		return sum;
 		
 	}
 
@@ -329,7 +337,7 @@ public class methods {
 						}
 						
 						
-						System.out.println(Arrays.toString(planes));
+					//	System.out.println(Arrays.toString(planes));
 						for (int i=0; i < planes.length; i++) {
 							
 							for (int j = 0; j < datas2.length; j++) {
@@ -338,8 +346,28 @@ public class methods {
 								
 								/*
 								//Debug
+<<<<<<< Upstream, based on branch 'master' of https://github.com/Git-OSZIMT/AS-Projekt.git
 																
 								System.out.println(i+"."+j+". Durchlauf | Plane in Planes.txt: "+planes[i]); 
+=======
+								boolean bool1 = false;
+								boolean bool2 = false;
+								
+								System.out.println(planes[i] + "if1");
+								System.out.println(datas2[j][i] + "if2");
+								
+								if (planes[i] == datas2[j][i]) {
+									
+									bool1=true;
+								}
+								
+								if (today.equals(datas2[j][2])) {
+									bool2=true;
+								}
+								
+								
+								System.out.println(i+"."+j+". Durchlauf | Plane in Planes.txt: "+planes[1]); 
+>>>>>>> 5dfe23c merge
 								System.out.println(i+"."+j+". Durchlauf | Plane in Buchungen: "+datas2[j][1]); 
 								System.out.println(i+"."+j+". Durchlauf | Heutiges Datum: "+today); 
 								System.out.println(i+"."+j+". Durchlauf | Datum in Buchungen: "+datas2[j][2]);
