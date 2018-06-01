@@ -39,6 +39,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import com.github.lgooddatepicker.optionalusertools.TimeChangeListener;
 import com.github.lgooddatepicker.zinternaltools.TimeChangeEvent;
+import com.sun.org.apache.bcel.internal.classfile.Method;
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 import java.awt.event.ActionListener;
@@ -113,6 +114,7 @@ public class gui extends JFrame implements ActionListener {
 				}
 			}
 		});		
+
 	}
 
 	/**
@@ -120,6 +122,7 @@ public class gui extends JFrame implements ActionListener {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public gui() {
+		
 		setResizable(false);
 		
 		
@@ -176,6 +179,12 @@ public class gui extends JFrame implements ActionListener {
 	    	listenModell.addElement(planes[i]);
 	    }
 	    DefaultListModel availableplanes = new DefaultListModel();
+	    DefaultListModel lst_occupiedplanes = new DefaultListModel();
+		String test[] = methods.occupiedtoday(read_write.lesen("data.txt"));
+		for (int i = 0; i < test.length; i++) {
+			lst_occupiedplanes.addElement(test[i]);
+		}
+	    
 
 		
 	    
@@ -183,7 +192,7 @@ public class gui extends JFrame implements ActionListener {
 		
 
 	    
-		JList list = new JList(listenModell);
+		JList list = new JList(lst_occupiedplanes);
 		sl_start.putConstraint(SpringLayout.NORTH, list, 53, SpringLayout.NORTH, start);
 		sl_start.putConstraint(SpringLayout.WEST, list, 10, SpringLayout.WEST, start);
 		sl_start.putConstraint(SpringLayout.EAST, list, 239, SpringLayout.WEST, start);

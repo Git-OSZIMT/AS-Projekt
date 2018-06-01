@@ -1,11 +1,15 @@
 package ASProjekt;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+
 import ASProjekt.read_write;
 
+@SuppressWarnings("unused")
 public class methods {
 	
 	
@@ -295,7 +299,7 @@ public class methods {
 		
 	}
 
-	public static void occupiedtoday(String[] datas, String[] planes, String datum) {
+	public static String[] occupiedtoday(String[] datas) {
 		
 		//Muss für jedes Flugzeug einzeln Berechnen wieviele Stunden gebucht sind, und dann davon einen Prozentwert bilden.
 		
@@ -303,7 +307,11 @@ public class methods {
 				
 				//Eindimensionales Array in Multidimensionales Array
 						String datas2[][] = new String[datas.length][6];
-
+						String today = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+						String planes[] = read_write.lesen("planes.txt");
+						String occupiedplanes[] = new String[planes.length];
+						
+						System.out.println(today+" Heute");
 						
 						for(int i=0; i < datas.length; i++) {
 							
@@ -314,29 +322,40 @@ public class methods {
 							for(int j=0; j < values.length; j++) {
 							
 								datas2[i][j]=values[j];
-							
+						
 							}
 						
 						}
-				
-
-						for (int i=0; i < datas2.length; i++) {
+						
+						
+						System.out.println(Arrays.toString(planes));
+						for (int i=0; i < planes.length; i++) {
 							
-							if (datas2[i][0] == datum) {
+							for (int j = 0; j < datas2.length; j++) {
+								boolean bool1 = planes[i] == datas2[j][1];
+								boolean bool2 = today == datas2[j][2];
+								//Debug
 								
-								// Es müsste Eine Variable für jedes Flugzeug geben, die irgendwie den Flugzeugen zugeordnet werden können
-								// In der Variable wird wie auch schon bei earningstoday die Differenz der Leihen an diesem Tag gezählt.
-								for (int x=0; x < planes.length; x++) {
-	
+								System.out.println(i+"."+j+". Durchlauf | Plane in Planes.txt: "+planes[1]); 
+								System.out.println(i+"."+j+". Durchlauf | Plane in Buchungen: "+datas2[j][1]); 
+								System.out.println(i+"."+j+". Durchlauf | Heutiges Datum: "+today); 
+								System.out.println(i+"."+j+". Durchlauf | Datum in Buchungen: "+datas2[j][2]);
+								System.out.println(i+"."+j+". Durchlauf | Boolean PlaneName: "+bool1);								
+								System.out.println(i+"."+j+". Durchlauf | Boolean Datum: "+bool2);								
 								
+								/*
+								if (planes[i] == datas2[j][1]) {
 									
-								}
-								
-								
-								
+									System.out.println("Erste IF: Done");
+									if (today == datas2[j][2]) {
+										System.out.println("Zweite IF: Done");
+										occupiedplanes[i] = planes[i];
+									}
+								}*/
 							}	
-							
 						}
+						//System.out.print(Arrays.toString(occupiedplanes));
+						return occupiedplanes;
 		
 		
 	}
