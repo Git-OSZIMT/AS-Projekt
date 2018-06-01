@@ -252,16 +252,33 @@ public class methods {
 				}
 		
 		
-		//Heute rausfiltern
+		//TODO Heute rausfiltern
+
 				for (int i=0; i < datas2.length; i++) {
 					
+					if (datas2[i][0] == datum) {
 					//Array in "I" und "2" - "I" und "1" = dauer dieser Leihe
 					//TODO DIESE METHODE MUSS FAILEN ! Es wird 18:00 - 13:00 gerechnet. Beides muss gekürzt werden zu "18" und "13".
-					int diffz= Integer.valueOf(datas2[i][2]) - Integer.valueOf(datas2[i][1]);
+					//Strings bekommen Urzeit (zb. 16:00)
+					String temp1=datas2[i][1];
+					String temp2=datas2[i][2];
+					//Strings werden bei ":" aufgeteilt. Erster Teil enthält die Stunde (zb. 16) und wird in temp1/2 zurück geschrieben
+					String[] temp1_1 = temp1.split(":");
+					temp1=temp1_1[0];
+					String[] temp2_1 = temp2.split(":");
+					temp2=temp2_1[0];
+					
+					System.out.println(temp1 + "tmp1");
+					System.out.println(temp2 + "tmp2");
+					
+					int diffz= Integer.valueOf(temp2) - Integer.valueOf(temp1);
 					//Adddiert die einzelnen Stunden
 					diffg= diffg + diffz;
+						
+					}	
 					
 				}
+				
 		return diffg;
 		
 	}
