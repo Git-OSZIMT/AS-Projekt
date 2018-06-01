@@ -283,7 +283,7 @@ public class methods {
 		
 	}
 
-	public static void occupiedtoday(String[] datas, String datum) {
+	public static void occupiedtoday(String[] datas, String[] planes, String datum) {
 		
 		//Muss für jedes Flugzeug einzeln Berechnen wieviele Stunden gebucht sind, und dann davon einen Prozentwert bilden.
 		
@@ -311,6 +311,14 @@ public class methods {
 						for (int i=0; i < datas2.length; i++) {
 							
 							if (datas2[i][0] == datum) {
+								
+								// Es müsste Eine Variable für jedes Flugzeug geben, die irgendwie den Flugzeugen zugeordnet werden können
+								// In der Variable wird wie auch schon bei earningstoday die Differenz der Leihen an diesem Tag gezählt.
+								for (int x=0; x < planes.length; x++) {
+	
+								
+									
+								}
 								
 								
 								
