@@ -59,11 +59,12 @@ public class methods {
 			//Hier erstmal FEHLER !
 			if (von_hour ==bis_hour) {
 				System.out.println("Leihe muss mindestens eine Stunde gehen");
-				
+				gui.setlabelimage("beginn_gleich_ende");
 			}
 			if (von_hour > bis_hour) {
 				System.out.println("Leihe kann nicht mit einer früheren Uhrzeit enden, als sie startet.");
-			}		
+				gui.setlabelimage("ende_vor_beginn");
+			}
 			
 		}else {
 					
@@ -334,9 +335,22 @@ public class methods {
 						for (int i=0; i < planes.length; i++) {
 							
 							for (int j = 0; j < datas2.length; j++) {
-								boolean bool1 = planes[i] == datas2[j][1];
-								boolean bool2 = today == datas2[j][2];
+								//boolean bool1 = planes[i] == datas2[j][1];
+								//boolean bool2 = today == datas2[j][2];
 								//Debug
+								boolean bool1 = false;
+								boolean bool2 = false;
+								
+								if (planes[i] == datas2[j][i]) {
+									System.out.println(planes[i] + "if1");
+									System.out.println(datas2[j][i] + "if2");
+									bool1=true;
+								}
+								
+								if (today.equals(datas2[j][2])) {
+									bool2=true;
+								}
+								
 								
 								System.out.println(i+"."+j+". Durchlauf | Plane in Planes.txt: "+planes[1]); 
 								System.out.println(i+"."+j+". Durchlauf | Plane in Buchungen: "+datas2[j][1]); 
@@ -344,6 +358,9 @@ public class methods {
 								System.out.println(i+"."+j+". Durchlauf | Datum in Buchungen: "+datas2[j][2]);
 								System.out.println(i+"."+j+". Durchlauf | Boolean PlaneName: "+bool1);								
 								System.out.println(i+"."+j+". Durchlauf | Boolean Datum: "+bool2);								
+								
+								
+								System.out.println(i+"."+j+". Durchlauf | Boolean PlaneName: "+bool1);	
 								
 								/*
 								if (planes[i] == datas2[j][1]) {

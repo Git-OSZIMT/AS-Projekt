@@ -81,7 +81,7 @@ public class gui extends JFrame implements ActionListener {
 	private JTextField txt_freibis;
 	private Object TimerTask;
 	JButton btn_test;
-	JLabel  lbl_starterror;
+	static JLabel  lbl_starterror;
 	JPanel start;
 	SpringLayout sl_start;
 	Integer pixel=0;
@@ -594,7 +594,7 @@ public class gui extends JFrame implements ActionListener {
 	}
 	}
 	
-	public void setlabelimage (String imagename) {
+	public static void setlabelimage (String imagename) {
 		lbl_starterror.setIcon(new ImageIcon(imagename));
 		
 	}
