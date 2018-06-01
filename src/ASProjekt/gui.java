@@ -585,5 +585,9 @@ public class gui extends JFrame implements ActionListener {
 	}
 	}
 	
+	public void setlabelimage (String imagename) {
+		lbl_starterror.setIcon(new ImageIcon(imagename));
+	}
+	
 	
 }
