@@ -239,7 +239,7 @@ public class methods {
 		
 		//hinzufügen des neuen Eintrages in das neue Array + Datei umschreiben
 		
-		data1[arraylength -1]="0"+String.valueOf(arraylength -1) + ";" + plane + ";" + datum + ";" + von + ";" + bis + ";" + name + ";";	
+		data1[arraylength-1]="0"+String.valueOf(arraylength ) + ";" + plane + ";" + datum + ";" + von + ";" + bis + ";" + name + ";";	
 		read_write.schreiben(data1, "data.txt");
 		
 		
@@ -313,9 +313,7 @@ public class methods {
 						String today = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 						String planes[] = read_write.lesen("planes.txt");
 						String occupiedplanes[] = new String[planes.length];
-						
-						System.out.println(today+" Heute");
-						
+												
 						for(int i=0; i < datas.length; i++) {
 							
 					        String CSV = datas[i];
@@ -335,40 +333,25 @@ public class methods {
 						for (int i=0; i < planes.length; i++) {
 							
 							for (int j = 0; j < datas2.length; j++) {
-								//boolean bool1 = planes[i] == datas2[j][1];
-								//boolean bool2 = today == datas2[j][2];
+								boolean bool1 = planes[i].equals(datas2[j][1]);
+								boolean bool2 = today.equals(datas2[j][2]);
+								
+								/*
 								//Debug
-								boolean bool1 = false;
-								boolean bool2 = false;
-								
-								if (planes[i] == datas2[j][1]) {
-									System.out.println(planes[i] + "if1");
-									System.out.println(datas2[j][i] + "if2");
-									bool1=true;
-								}
-								
-								if (today.equals(datas2[j][2])) {
-									bool2=true;
-								}
-								
-								
+																
 								System.out.println(i+"."+j+". Durchlauf | Plane in Planes.txt: "+planes[i]); 
 								System.out.println(i+"."+j+". Durchlauf | Plane in Buchungen: "+datas2[j][1]); 
 								System.out.println(i+"."+j+". Durchlauf | Heutiges Datum: "+today); 
 								System.out.println(i+"."+j+". Durchlauf | Datum in Buchungen: "+datas2[j][2]);
 								System.out.println(i+"."+j+". Durchlauf | Boolean PlaneName: "+bool1);								
 								System.out.println(i+"."+j+". Durchlauf | Boolean Datum: "+bool2);								
-
 								
-								/*
-								if (planes[i] == datas2[j][1]) {
-									
-									System.out.println("Erste IF: Done");
-									if (today == datas2[j][2]) {
-										System.out.println("Zweite IF: Done");
-										occupiedplanes[i] = planes[i];
-									}
-								}*/
+								*/
+								
+								if (bool1 && bool2) {
+									occupiedplanes[i] = planes[i];
+								}
+								
 							}	
 						}
 						//System.out.print(Arrays.toString(occupiedplanes));

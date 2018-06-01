@@ -180,9 +180,12 @@ public class gui extends JFrame implements ActionListener {
 	    }
 	    DefaultListModel availableplanes = new DefaultListModel();
 	    DefaultListModel lst_occupiedplanes = new DefaultListModel();
-		String test[] = methods.occupiedtoday(read_write.lesen("data.txt"));
-		for (int i = 0; i < test.length; i++) {
-			lst_occupiedplanes.addElement(test[i]);
+		String occupiedplanes[] = methods.occupiedtoday(read_write.lesen("data.txt"));
+		for (int i = 0; i < occupiedplanes.length; i++) {
+			lst_occupiedplanes.addElement(occupiedplanes[i]);
+		}
+		for (int i = 0; i < lst_occupiedplanes.getSize(); i++) {
+			lst_occupiedplanes.removeElement(null);
 		}
 	    
 
@@ -341,6 +344,17 @@ public class gui extends JFrame implements ActionListener {
 
 				
 				methods.addleihe(plane, von, bis, datum, name);
+				
+				//aktuallisieren der "Heute verliehenen Flugzeuge" bei neuer Leihe
+				
+				String occupiedplanes[] = methods.occupiedtoday(read_write.lesen("data.txt"));
+				lst_occupiedplanes.removeAllElements();
+				for (int i = 0; i < occupiedplanes.length; i++) {
+					lst_occupiedplanes.addElement(occupiedplanes[i]);
+				}
+				for (int i = 0; i < lst_occupiedplanes.getSize(); i++) {
+					lst_occupiedplanes.removeElement(null);
+				}
 				
 			}
 		});
