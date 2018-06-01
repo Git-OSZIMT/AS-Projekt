@@ -226,7 +226,45 @@ public class methods {
 		
 	}
 
+	public static int earningstoday(String[] datas, String datum) {
+		//Datas = data.txt Arrays
+		int diffg=0;
+		//Muss herausfinden wieviel Differenz an Stunden insgesamt vorhanden sind
+		//Von ist feld 1 , Bis Feld 2
+		
+		
+		//Eindimensionales Array in Multidimensionales Array
+				String datas2[][] = new String[datas.length][6];
 
+				
+				for(int i=0; i < datas.length; i++) {
+					
+			        String CSV = datas[i];
+
+			        String[] values = CSV.split(";");
+					
+					for(int j=0; j < values.length; j++) {
+					
+						datas2[i][j]=values[j];
+					
+					}
+				
+				}
+		
+		
+		//Heute rausfiltern
+				for (int i=0; i < datas2.length; i++) {
+					
+					//Array in "I" und "2" - "I" und "1" = dauer dieser Leihe
+					//TODO DIESE METHODE MUSS FAILEN ! Es wird 18:00 - 13:00 gerechnet. Beides muss gekürzt werden zu "18" und "13".
+					int diffz= Integer.valueOf(datas2[i][2]) - Integer.valueOf(datas2[i][1]);
+					//Adddiert die einzelnen Stunden
+					diffg= diffg + diffz;
+					
+				}
+		return diffg;
+		
+	}
 	
 	
 }
