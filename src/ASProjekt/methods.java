@@ -256,12 +256,12 @@ public class methods {
 
 				for (int i=0; i < datas2.length; i++) {
 					
-					if (datas2[i][0] == datum) {
+					if (datas2[i][2] == datum) {
 					//Array in "I" und "2" - "I" und "1" = dauer dieser Leihe
 					//TODO DIESE METHODE MUSS FAILEN ! Es wird 18:00 - 13:00 gerechnet. Beides muss gekürzt werden zu "18" und "13".
 					//Strings bekommen Urzeit (zb. 16:00)
-					String temp1=datas2[i][1];
-					String temp2=datas2[i][2];
+					String temp1=datas2[i][3];
+					String temp2=datas2[i][4];
 					//Strings werden bei ":" aufgeteilt. Erster Teil enthält die Stunde (zb. 16) und wird in temp1/2 zurück geschrieben
 					String[] temp1_1 = temp1.split(":");
 					temp1=temp1_1[0];
@@ -282,6 +282,43 @@ public class methods {
 		return diffg;
 		
 	}
-	
+
+	public static void occupiedtoday(String[] datas, String datum) {
+		
+		//Muss für jedes Flugzeug einzeln Berechnen wieviele Stunden gebucht sind, und dann davon einen Prozentwert bilden.
+		
+		//Datas = data.txt Arrays		
+				
+				//Eindimensionales Array in Multidimensionales Array
+						String datas2[][] = new String[datas.length][6];
+
+						
+						for(int i=0; i < datas.length; i++) {
+							
+					        String CSV = datas[i];
+
+					        String[] values = CSV.split(";");
+							
+							for(int j=0; j < values.length; j++) {
+							
+								datas2[i][j]=values[j];
+							
+							}
+						
+						}
+				
+
+						for (int i=0; i < datas2.length; i++) {
+							
+							if (datas2[i][0] == datum) {
+								
+								
+								
+							}	
+							
+						}
+		
+		
+	}
 	
 }
