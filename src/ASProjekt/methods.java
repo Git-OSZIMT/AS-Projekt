@@ -51,70 +51,82 @@ public class methods {
 		
 		}
 		
-		
+		System.out.println(von_hour);
+		System.out.println(bis_hour);
 		//TODO : If Abfragen so integrieren das routine abbricht wenn ungültig. Am besten mit allen anderen Checks ein Boolean auf false setzen. Und dann eine IF für die ganze routine
-		if (von_hour > bis_hour) {
-			System.out.println("Leihe kann nicht mit einer früheren Uhrzeit enden, als sie startet.");
+		if (von_hour > bis_hour || von_hour == bis_hour) {
+			//Hier erstmal FEHLER !
+			if (von_hour ==bis_hour) {
+				System.out.println("Leihe muss mindestens eine Stunde gehen");
+			}
+			if (von_hour > bis_hour) {
+				System.out.println("Leihe kann nicht mit einer früheren Uhrzeit enden, als sie startet.");
+			}		
 			
-		}
-		
-		if (von_hour == bis_hour) {
-			System.out.println("Leihe muss mindestens eine Stunde gehen");			
-		}
-		
-		
-	for (int i=0; i < datas2.length; i++) {
-		Boolean ischecknotvalid = false;
-		
-			//System.out.println("Schleife " + i);
+		}else {
+					
+			System.out.println("Alles OK!");
 			
-			if(datas2[i][2].equals(datum)) {
+			
+			for (int i=0; i < datas2.length; i++) {
+				Boolean ischecknotvalid = false;
 				
-				
-				
-				System.out.println("Datum Check : gefunden");
+					//System.out.println("Schleife " + i);
+					
+					if(datas2[i][2].equals(datum)) {
+						
+						
+						
+						System.out.println("Datum Check : gefunden");
 
-				LocalTime start = LocalTime.parse( datas2[i][3] );  //gespeichertes von
-				LocalTime stop = LocalTime.parse( datas2[i][4] );	  //gespeichertes bis
-				
-				for (int x= von_hour; x < bis_hour ; x++) {
-					String time = String.valueOf(x) + ":00:00";
-					if (time.length() !=8) {
-						time= "0" + time;
+						LocalTime start = LocalTime.parse( datas2[i][3] );  //gespeichertes von
+						LocalTime stop = LocalTime.parse( datas2[i][4] );	  //gespeichertes bis
+						
+						for (int x= von_hour; x < bis_hour ; x++) {
+							String time = String.valueOf(x) + ":00:00";
+							if (time.length() !=8) {
+								time= "0" + time;
+								
+							}
+							
+							System.out.println("Zeit " + time);
+							
+							if (Boolean.FALSE.equals(ischecknotvalid)) {
+								LocalTime check = LocalTime.parse( time ); //Variable die alle Zeiten zwischen von und bis abfragt
+								ischecknotvalid = ( check.isAfter( start ) && check.isBefore( stop ) ) ;	
+							}		
+							
+							System.out.println("Ergebnis des Checks : " + ischecknotvalid);
+							
+						}
+						
+						System.out.println("Leihe gültig? (True = ungültig) " + ischecknotvalid);
+						
+						if (Boolean.TRUE.equals(ischecknotvalid)) { 
+												
+							//Muss Flugzeug (datas2[i][1] aus einer liste löschen)
+							Arrays.sort(planes);
+							int z = Arrays.binarySearch(planes, datas2[i][1]);
+							planes[z]=null;
+							
+						}
 						
 					}
 					
-					System.out.println("Zeit " + time);
-					
-					if (Boolean.FALSE.equals(ischecknotvalid)) {
-						LocalTime check = LocalTime.parse( time ); //Variable die alle Zeiten zwischen von und bis abfragt
-						ischecknotvalid = ( check.isAfter( start ) && check.isBefore( stop ) ) ;	
-					}		
-					
-					System.out.println("Ergebnis des Checks : " + ischecknotvalid);
-					
-				}
+				}		
 				
-				System.out.println("Leihe gültig? (True = ungültig) " + ischecknotvalid);
-				
-				if (Boolean.TRUE.equals(ischecknotvalid)) { 
-										
-					//Muss Flugzeug (datas2[i][1] aus einer liste löschen)
-					Arrays.sort(planes);
-					int z = Arrays.binarySearch(planes, datas2[i][1]);
-					planes[z]=null;
+				for (int y=0; y < planes.length ; y++) {
 					
-				}
-				
-			}
+					System.out.println("Rückgabe von checkavailable: " + planes[y]);
+					
+					}
 			
-		}		
+		}
 		
-		for (int y=0; y < planes.length ; y++) {
-			
-			System.out.println("Rückgabe von checkavailable: " + planes[y]);
-			
-			}
+		
+		
+		
+	
 		
 		return planes;
 		
