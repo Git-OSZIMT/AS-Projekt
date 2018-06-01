@@ -352,6 +352,7 @@ public class methods {
 									occupiedplanes[i] = planes[i];
 								}
 								
+								
 							}	
 						}
 						//System.out.print(Arrays.toString(occupiedplanes));
