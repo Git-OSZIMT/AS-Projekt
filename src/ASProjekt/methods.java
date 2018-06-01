@@ -341,7 +341,7 @@ public class methods {
 								boolean bool1 = false;
 								boolean bool2 = false;
 								
-								if (planes[i] == datas2[j][i]) {
+								if (planes[i] == datas2[j][1]) {
 									System.out.println(planes[i] + "if1");
 									System.out.println(datas2[j][i] + "if2");
 									bool1=true;
@@ -352,15 +352,13 @@ public class methods {
 								}
 								
 								
-								System.out.println(i+"."+j+". Durchlauf | Plane in Planes.txt: "+planes[1]); 
+								System.out.println(i+"."+j+". Durchlauf | Plane in Planes.txt: "+planes[i]); 
 								System.out.println(i+"."+j+". Durchlauf | Plane in Buchungen: "+datas2[j][1]); 
 								System.out.println(i+"."+j+". Durchlauf | Heutiges Datum: "+today); 
 								System.out.println(i+"."+j+". Durchlauf | Datum in Buchungen: "+datas2[j][2]);
 								System.out.println(i+"."+j+". Durchlauf | Boolean PlaneName: "+bool1);								
 								System.out.println(i+"."+j+". Durchlauf | Boolean Datum: "+bool2);								
-								
-								
-								System.out.println(i+"."+j+". Durchlauf | Boolean PlaneName: "+bool1);	
+
 								
 								/*
 								if (planes[i] == datas2[j][1]) {
