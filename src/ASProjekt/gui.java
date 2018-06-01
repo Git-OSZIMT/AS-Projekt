@@ -85,6 +85,10 @@ public class gui extends JFrame implements ActionListener {
 	SpringLayout sl_start;
 	Integer pixel=0;
 	Boolean animpos=false;
+	Image error1 = new ImageIcon(this.getClass().getResource("/error_unknown.png")).getImage();
+	Image beginn_gleich_ende = new ImageIcon(this.getClass().getResource("/beginn_gleich_ende.png")).getImage();
+	Image datum_vergangenheit = new ImageIcon(this.getClass().getResource("/datum_vergangenheit.png")).getImage();
+	Image ende_vor_beginn = new ImageIcon(this.getClass().getResource("/ende_vor_beginn.png")).getImage();
 	
 	Timer t;
 	
@@ -131,8 +135,10 @@ public class gui extends JFrame implements ActionListener {
 		
 	}catch(ArrayIndexOutOfBoundsException exception){
 		
-		//TODO
-		System.out.println("catched");
+		//Hier soll Unexcepted Error erscheinen.
+		
+		
+
 	}
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(gui.class.getResource("/com/jgoodies/looks/windows/icons/Computer.gif")));
@@ -218,7 +224,6 @@ public class gui extends JFrame implements ActionListener {
 		sl_start.putConstraint(SpringLayout.NORTH, lbl_starterror, 1, SpringLayout.SOUTH, start);
 		sl_start.putConstraint(SpringLayout.WEST, lbl_starterror, 0, SpringLayout.WEST, start);
 		sl_start.putConstraint(SpringLayout.EAST, lbl_starterror, 0, SpringLayout.EAST, lbl_logo);
-		Image error1 = new ImageIcon(this.getClass().getResource("/error_datum.png")).getImage();
 		lbl_starterror.setIcon(new ImageIcon(error1));
 		start.add(lbl_starterror);
 	
