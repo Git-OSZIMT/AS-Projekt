@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import ASProjekt.gui;
 
 import ASProjekt.read_write;
 
@@ -58,6 +59,7 @@ public class methods {
 			//Hier erstmal FEHLER !
 			if (von_hour ==bis_hour) {
 				System.out.println("Leihe muss mindestens eine Stunde gehen");
+				
 			}
 			if (von_hour > bis_hour) {
 				System.out.println("Leihe kann nicht mit einer früheren Uhrzeit enden, als sie startet.");
