@@ -1,6 +1,7 @@
 package ASProjekt;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -311,29 +312,21 @@ public class methods {
 	}
 
 	public static String[] occupiedtoday(String[] datas) {
-		
-		//Muss für jedes Flugzeug einzeln Berechnen wieviele Stunden gebucht sind, und dann davon einen Prozentwert bilden.
-		
-		//Datas = data.txt Arrays		
-				
-				//Eindimensionales Array in Multidimensionales Array
-						String datas2[][] = new String[datas.length][6];
-						String today = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
-						String planes[] = read_write.lesen("planes.txt");
-						String occupiedplanes[] = new String[planes.length];
-												
+						
+					String datas2[][] = new String[datas.length][6];
+					String today = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+					String planes[] = read_write.lesen("planes.txt");
+					String occupiedplanes[] = new String[planes.length];
+					String occupiedplanes2[][] = new String[occupiedplanes.length][2];
+						
+						//Eindimensionales Array in Multidimensionales Array
 						for(int i=0; i < datas.length; i++) {
 							
 					        String CSV = datas[i];
-
-					        String[] values = CSV.split(";");
-							
+					        String[] values = CSV.split(";");	
 							for(int j=0; j < values.length; j++) {
-							
 								datas2[i][j]=values[j];
-						
-							}
-						
+							}	
 						}
 						
 						
@@ -341,41 +334,13 @@ public class methods {
 						for (int i=0; i < planes.length; i++) {
 							
 							for (int j = 0; j < datas2.length; j++) {
+								
+								//bool1 = stimmt das geprüfte plane mit dem ausgeliehenen
 								boolean bool1 = planes[i].equals(datas2[j][1]);
+								//bool2 = stimmt das Datum
 								boolean bool2 = today.equals(datas2[j][2]);
-								
-								/*
-								//Debug
-<<<<<<< Upstream, based on branch 'master' of https://github.com/Git-OSZIMT/AS-Projekt.git
-																
-								System.out.println(i+"."+j+". Durchlauf | Plane in Planes.txt: "+planes[i]); 
-=======
-								boolean bool1 = false;
-								boolean bool2 = false;
-								
-								System.out.println(planes[i] + "if1");
-								System.out.println(datas2[j][i] + "if2");
-								
-								if (planes[i] == datas2[j][i]) {
-									
-									bool1=true;
-								}
-								
-								if (today.equals(datas2[j][2])) {
-									bool2=true;
-								}
-								
-								
-								System.out.println(i+"."+j+". Durchlauf | Plane in Planes.txt: "+planes[1]); 
->>>>>>> 5dfe23c merge
-								System.out.println(i+"."+j+". Durchlauf | Plane in Buchungen: "+datas2[j][1]); 
-								System.out.println(i+"."+j+". Durchlauf | Heutiges Datum: "+today); 
-								System.out.println(i+"."+j+". Durchlauf | Datum in Buchungen: "+datas2[j][2]);
-								System.out.println(i+"."+j+". Durchlauf | Boolean PlaneName: "+bool1);								
-								System.out.println(i+"."+j+". Durchlauf | Boolean Datum: "+bool2);								
-								
-								*/
-								
+						
+								// Wenn beides Stimmt wird das aktuelle plane in occupiedplanes geschrieben.
 								if (bool1 && bool2) {
 									occupiedplanes[i] = planes[i];
 								}
@@ -383,10 +348,95 @@ public class methods {
 								
 							}	
 						}
+						
+						//
+						//Enthält nun alle heute verliehenen Flugzeuge. Es folgt : Wie lange sind diese ausgeliehen?\\
+						//
+						
+						
+						//Eindimensionales Array in Multidimensionales Array
+						for(int i=0; i < occupiedplanes.length; i++) {
+							
+					      occupiedplanes2[i][0]=occupiedplanes[i];
+					      occupiedplanes2[i][1]="0";
+					      
+							System.out.println(occupiedplanes2[i][0]);
+						}
+						
+						
+						for (int i = 0; i < datas2.length; i++) {
+						
+							String von=datas2[i][3];
+							String bis=datas2[i][4];
+							//Strings werden bei ":" aufgeteilt. Erster Teil enthält die Stunde (zb. 16) und wird in temp1/2 zurück geschrieben
+							String[] von_1 = von.split(":");
+							von=von_1[0];
+							String[] bis_1 = bis.split(":");
+							bis=bis_1[0];
+						
+							int diff = Integer.valueOf(bis) - Integer.valueOf(von);
+							System.out.println("diff: " + diff);
+							double proz=(100/12.0)*diff;
+							
+							DecimalFormat df = new DecimalFormat("#.##");
+							String prozent=df.format(proz);
+							
+							
+							System.out.println("Prozent " + prozent);
+							//System.out.println("diff " + diff + " bis " + bis + "von " + von);
+							//System.out.println("!!!" + occupiedplanes2[1][0]);
+							
+							for (int z=0; z < occupiedplanes.length; z++) {
+								
+								//System.out.println("Z IST : " + z);
+								
+								if (occupiedplanes2[z][0] != null) {
+									
+									System.out.println(occupiedplanes2[z][0] + " vgl. " + datas2[i][1] + " Z: " + z + " I: " + i);
+									
+									if (occupiedplanes2[z][0].contentEquals(datas2[i][1]) ){
+										
+										//Prozentumerechnen
+										//12 = 100%
+										//Integer.valueOf(occupiedplanes2[z][1]) + diff
+										
+										occupiedplanes2[z][1]= String.valueOf((Integer.valueOf(occupiedplanes2[z][1]) + prozent));
+										
+										System.out.println("Flugzeug " + occupiedplanes2[z][0] + " geliehene Stunden "+ occupiedplanes2[z][1]);
+										
+									}
+								
+								}
+							}
+					
+							
+						}		//Hier enthält occupedplanes2 jeweils im ersten element das Flugzeug und im 2. die geliehenen Stunden				
+						
+						
+						//Rückumwandlung von occupiedplanes2 zu occupiedplanes
+						for (int x=0; x < occupiedplanes2.length; x++) {
+						
+							
+							try {
+								if (occupiedplanes[x] != null){
+									occupiedplanes[x]= occupiedplanes2[x][0] + " [ Ausgelastet zu " + occupiedplanes2[x][1] + "% ]";
+								}
+								
+								
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							
+							
+						}
+						
+						
 						//System.out.print(Arrays.toString(occupiedplanes));
 						return occupiedplanes;
 		
 		
 	}
+	
+
 	
 }

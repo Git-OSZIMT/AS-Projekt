@@ -1,5 +1,4 @@
 package ASProjekt;
-//"Von Wann bis Wann sind die Verfügbaren Maschienen frei"
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
