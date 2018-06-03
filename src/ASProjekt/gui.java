@@ -80,7 +80,6 @@ public class gui extends JFrame implements ActionListener {
 	private JTextField txt_freivon;
 	private JTextField txt_freibis;
 	private Object TimerTask;
-	JButton btn_test;
 	static JLabel  lbl_starterror;
 	static JLabel lbl_newerror;
 	JPanel start;
@@ -234,13 +233,6 @@ public class gui extends JFrame implements ActionListener {
 		sl_start.putConstraint(SpringLayout.EAST, txt_einnahmen, -577, SpringLayout.EAST, start);
 		start.add(txt_einnahmen);
 		txt_einnahmen.setColumns(10);
-	
-		
-		btn_test = new JButton("New button");
-		sl_start.putConstraint(SpringLayout.NORTH, btn_test, 65, SpringLayout.NORTH, start);
-		sl_start.putConstraint(SpringLayout.EAST, btn_test, -106, SpringLayout.WEST, lbl_logo);
-		start.add(btn_test);
-		btn_test.addActionListener(this);
 		
 		
 		TimePickerSettings timeSettings = new TimePickerSettings();
@@ -640,15 +632,7 @@ public class gui extends JFrame implements ActionListener {
 		
 	}//END of GUI Class
 	
-	public void actionPerformed(ActionEvent e) { //Allgemeiner ActionListener, lauscht auf alles was passiert
-		
-		if(e.getSource() == btn_test){  //sagt dem Actionlister das er was tun soll wenn die Quelle der Action btn_test ist.
-		//	System.out.println("Timer startet");
-			t.setDelay(5);	//alle 5ms läuft der Timer einmal ab 
-			animpos=false; //animpos gibt an ob das label sichtbar ist oder nicht ( false= versteckt)
-			pixel=0;		//Anfangswert
-			t.start();//GOES TO t=new Timer
-	}
+	public void actionPerformed(ActionEvent e) {
 	}
 	
 	public static void setlabelimage (String imagename) {
