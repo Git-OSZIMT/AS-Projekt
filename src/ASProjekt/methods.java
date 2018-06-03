@@ -21,7 +21,7 @@ public class methods {
 	}
 	
 	
-	//checkavailable gibt erfolgreich eine Liste von freien Flugzeugen zurück !
+
 	public static String[] checkavailable(String datum, String von, String bis, String[] datas, String[] planes) {
 		//System.out.println("Checkvalid gestartet");
 		//von und bis kommen als yy:zz an, benötigt wird xx:yy:zz

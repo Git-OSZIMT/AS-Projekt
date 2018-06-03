@@ -94,13 +94,6 @@ public class gui extends JFrame implements ActionListener {
 	Image datum_vergangenheit = new ImageIcon(this.getClass().getResource("/datum_vergangenheit.png")).getImage();
 	Image ende_vor_beginn = new ImageIcon(this.getClass().getResource("/ende_vor_beginn.png")).getImage();
 	
-	/*
-	static Image error1;
-	static Image beginn_gleich_ende;
-	static Image datum_vergangenheit;
-	static Image ende_vor_beginn;
-	*/
-	
 	static Timer t;
 	
 	/**
