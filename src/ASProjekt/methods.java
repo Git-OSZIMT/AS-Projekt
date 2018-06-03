@@ -218,20 +218,20 @@ public class methods {
 		if ((von.equals(":00")) || (plane.equals("null")) || (bis.equals(":00")) || (datum.equals("")) || (name.equals(""))) {
 			
 			if (plane.equals("null")) {
-				System.out.println("Err: Kein Flugzeug ausgewählt. Bitte wählen sie ein Flugzeug aus.");
+				//System.out.println("Err: Kein Flugzeug ausgewählt. Bitte wählen sie ein Flugzeug aus.");
 				gui.setlabelimage("no_plane");
 			}
 			if (von.equals(":00")) {
-				System.out.println("Err: \"Von\" nicht definiert. Bitte wählen sie eine Zeit für \"Von\" aus.");			
+				//System.out.println("Err: \"Von\" nicht definiert. Bitte wählen sie eine Zeit für \"Von\" aus.");			
 			}
 			if (bis.equals(":00")) {
-				System.out.println("Err: \"Bis\" nicht definiert. Bitte wählen sie eine Zeit für \"Bis\" aus.");
+				//System.out.println("Err: \"Bis\" nicht definiert. Bitte wählen sie eine Zeit für \"Bis\" aus.");
 			}
 			if (datum.equals("")) {
-				System.out.println("Err: Kein Datum angegeben. Bitte geben sie ein Datum an.");
+				//System.out.println("Err: Kein Datum angegeben. Bitte geben sie ein Datum an.");
 			}
 			if (name.equals("")) {
-				System.out.println("Err: Kein Name angegeben. Bitte geben sie einen Namen für die Buchung an (e.g. den Familiennamen)");
+				//System.out.println("Err: Kein Name angegeben. Bitte geben sie einen Namen für die Buchung an (e.g. den Familiennamen)");
 				gui.setlabelimage("no_name");
 			}
 			return;
@@ -244,7 +244,7 @@ public class methods {
 		//Initialisierung der Länge für das neue Array
 		int arraylength=0;
 		arraylength=data.length +1;
-		System.out.print("Arraylenght: "+arraylength+"\n");
+		//System.out.print("Arraylenght: "+arraylength+"\n");
 		
 		//Kopieren aller Werte von altem Array in neues Array
 		
@@ -253,7 +253,7 @@ public class methods {
 		for (int i=0; i < data.length; i++) {
 
 			data1[i]=data[i];			
-			System.out.println(data1[i]);
+			//System.out.println(data1[i]);
 		}
 		
 		//hinzufügen des neuen Eintrages in das neue Array + Datei umschreiben
@@ -369,7 +369,7 @@ public class methods {
 					      occupiedplanes2[i][0]=occupiedplanes[i];
 					      occupiedplanes2[i][1]="0";
 					      
-							System.out.println(occupiedplanes2[i][0]);
+						//	System.out.println(occupiedplanes2[i][0]);
 						}
 						
 						
@@ -384,14 +384,14 @@ public class methods {
 							bis=bis_1[0];
 						
 							int diff = Integer.valueOf(bis) - Integer.valueOf(von);
-							System.out.println("diff: " + diff);
+						//	System.out.println("diff: " + diff);
 							double proz=(100/12.0)*diff;
 							
 							DecimalFormat df = new DecimalFormat("#.##");
 							String prozent=df.format(proz);
 							
 							
-							System.out.println("Prozent " + prozent);
+							//System.out.println("Prozent " + prozent);
 							//System.out.println("diff " + diff + " bis " + bis + "von " + von);
 							//System.out.println("!!!" + occupiedplanes2[1][0]);
 							
@@ -401,7 +401,7 @@ public class methods {
 								
 								if (occupiedplanes2[z][0] != null) {
 									
-									System.out.println(occupiedplanes2[z][0] + " vgl. " + datas2[i][1] + " Z: " + z + " I: " + i);
+								//	System.out.println(occupiedplanes2[z][0] + " vgl. " + datas2[i][1] + " Z: " + z + " I: " + i);
 									
 									if (occupiedplanes2[z][0].contentEquals(datas2[i][1]) ){
 										
@@ -413,7 +413,7 @@ public class methods {
 										occupiedplanes2[z][2]=datas2[i][5];
 										occupiedplanes2[z][3]=datas2[i][3] + " - " + datas2[i][4];
 										
-										System.out.println("Flugzeug " + occupiedplanes2[z][0] + " geliehene Stunden "+ occupiedplanes2[z][1]);
+										//System.out.println("Flugzeug " + occupiedplanes2[z][0] + " geliehene Stunden "+ occupiedplanes2[z][1]);
 										
 									}
 								
