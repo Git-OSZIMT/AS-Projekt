@@ -81,6 +81,7 @@ public class gui extends JFrame implements ActionListener {
 	private Object TimerTask;
 	static JLabel  lbl_starterror;
 	static JLabel lbl_newerror;
+	static JButton btn_addleihe;
 	JPanel start;
 	SpringLayout sl_start;
 	static Integer pixel=0;
@@ -305,7 +306,7 @@ public class gui extends JFrame implements ActionListener {
 		sl_create.putConstraint(SpringLayout.EAST, lst_leihemoeglich, 0, SpringLayout.EAST, datepick);
 		create.add(lst_leihemoeglich);
 				
-		JButton btn_addleihe = new JButton("Leihe Aufnehmen");
+		btn_addleihe = new JButton("Leihe Aufnehmen");
 		sl_create.putConstraint(SpringLayout.WEST, btn_addleihe, 0, SpringLayout.WEST, lblBis);
 		sl_create.putConstraint(SpringLayout.SOUTH, btn_addleihe, -147, SpringLayout.SOUTH, create);
 		sl_create.putConstraint(SpringLayout.EAST, btn_addleihe, 248, SpringLayout.EAST, timepick_von);
@@ -317,6 +318,8 @@ public class gui extends JFrame implements ActionListener {
 				String bis = timepick_bis.getTimeStringOrEmptyString();
 				String datum = datepick.getDateStringOrEmptyString();
 				String name = txt_name.getText();	
+				
+				btn_addleihe.setEnabled(false);
 				
 				/*
 				//Debug-Möglichkeit (Console Output der Benötigten Variablen und ihrem Inhalt (On-Click))
@@ -402,6 +405,7 @@ public class gui extends JFrame implements ActionListener {
 				
 		timepick_von.addTimeChangeListener(new TimeChangeListener() {
 		public void timeChanged(TimeChangeEvent event) {
+				btn_addleihe.setEnabled(true);
 				LocalTime time = timepick_von.getTime();
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
@@ -421,6 +425,7 @@ public class gui extends JFrame implements ActionListener {
 						
 		timepick_bis.addTimeChangeListener(new TimeChangeListener() {
 		public void timeChanged(TimeChangeEvent event) {
+			btn_addleihe.setEnabled(true);
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
 					
@@ -448,6 +453,7 @@ public class gui extends JFrame implements ActionListener {
 				
 		datepick.addDateChangeListener(new DateChangeListener() {
 		public void dateChanged(DateChangeEvent event) {
+			btn_addleihe.setEnabled(true);
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
 						
@@ -643,7 +649,7 @@ public class gui extends JFrame implements ActionListener {
 		animpos=false; //animpos gibt an ob das label sichtbar ist oder nicht ( false= versteckt)
 		pixel=0;		//Anfangswert
 		t.start();//GOES TO t=new Timer
-		
+		btn_addleihe.setEnabled(false);
 	}
 	
 	

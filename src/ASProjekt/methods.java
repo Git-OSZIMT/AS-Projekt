@@ -118,7 +118,14 @@ public class methods {
 						if (Boolean.TRUE.equals(ischecknotvalid)) { 
 												
 							//Muss Flugzeug (datas2[i][1] aus einer liste löschen)
-							Arrays.sort(planes);
+							
+							try {
+								Arrays.sort(planes);
+							} catch (Exception e) {
+								//
+							}
+							
+							
 							int z = Arrays.binarySearch(planes, datas2[i][1]);
 							planes[z]=null;
 							
