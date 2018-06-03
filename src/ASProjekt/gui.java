@@ -48,6 +48,7 @@ import ASProjekt.read_write;
 import ASProjekt.methods;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.SwingConstants;
 
 
 
@@ -67,7 +68,7 @@ class timeveto implements TimeVetoPolicy {
 }
 
 
-
+//Haupt-Deklarationsteil
 
 @SuppressWarnings({ "serial", "unused" })
 public class gui extends JFrame implements ActionListener {
@@ -76,8 +77,6 @@ public class gui extends JFrame implements ActionListener {
 	private JTextField txt_planeadd;
 	private JTextField txt_rename;
 	private JTextField txt_name;
-	private JTextField txt_freivon;
-	private JTextField txt_freibis;
 	private Object TimerTask;
 	static JLabel  lbl_starterror;
 	static JLabel lbl_newerror;
@@ -92,6 +91,8 @@ public class gui extends JFrame implements ActionListener {
 	Image beginn_gleich_ende = new ImageIcon(this.getClass().getResource("/beginn_gleich_ende.png")).getImage();
 	Image datum_vergangenheit = new ImageIcon(this.getClass().getResource("/datum_vergangenheit.png")).getImage();
 	Image ende_vor_beginn = new ImageIcon(this.getClass().getResource("/ende_vor_beginn.png")).getImage();
+	Image no_plane = new ImageIcon(this.getClass().getResource("/no_plane.png")).getImage();
+	Image no_name = new ImageIcon(this.getClass().getResource("/no_name.png")).getImage();
 	
 	static Timer t;
 	
@@ -102,6 +103,9 @@ public class gui extends JFrame implements ActionListener {
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException 
 	 */
+	
+	//Hauptteil
+	
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		//CODE INIT
 		
@@ -165,11 +169,6 @@ public class gui extends JFrame implements ActionListener {
 		tabbedPane.setFont(tabbedPane.getFont().deriveFont(tabbedPane.getFont().getSize() + 3f));
 		getContentPane().add(tabbedPane);
 		
-		JPanel start = new JPanel();
-		tabbedPane.addTab("Übersicht", new ImageIcon(gui.class.getResource("/com/jgoodies/looks/plastic/icons/HomeFolder.gif")), start, null);
-		SpringLayout sl_start = new SpringLayout();
-		start.setLayout(sl_start);
-		
 		//LIST MODELL
 		
 	    DefaultListSelectionModel m = new DefaultListSelectionModel();
@@ -189,54 +188,71 @@ public class gui extends JFrame implements ActionListener {
 		for (int i = 0; i < lst_occupiedplanes.getSize(); i++) {
 			lst_occupiedplanes.removeElement(null);
 		}
-	    
-
-		
-	    
-		//ENDE LIST MODELL
 		
 
-	    
-		JList list = new JList(lst_occupiedplanes);
-		sl_start.putConstraint(SpringLayout.NORTH, list, 53, SpringLayout.NORTH, start);
-		sl_start.putConstraint(SpringLayout.WEST, list, 10, SpringLayout.WEST, start);
-		sl_start.putConstraint(SpringLayout.EAST, list, 239, SpringLayout.WEST, start);
-	    list.setSelectionModel(m);
-		start.add(list);
-		
-		JLabel lblHeuteVerlieheneFlugzeuge = new JLabel("Heute Verliehene Flugzeuge");
-		sl_start.putConstraint(SpringLayout.NORTH, lblHeuteVerlieheneFlugzeuge, 11, SpringLayout.NORTH, start);
-		sl_start.putConstraint(SpringLayout.WEST, lblHeuteVerlieheneFlugzeuge, 10, SpringLayout.WEST, start);
-		lblHeuteVerlieheneFlugzeuge.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		start.add(lblHeuteVerlieheneFlugzeuge);
-		
-		JLabel lbl_logo = new JLabel("");
-		sl_start.putConstraint(SpringLayout.NORTH, lbl_logo, 0, SpringLayout.NORTH, start);
-		sl_start.putConstraint(SpringLayout.EAST, lbl_logo, 0, SpringLayout.EAST, start);
-		Image logo = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
-		lbl_logo.setIcon(new ImageIcon(logo));
-		start.add(lbl_logo);
-		
-		JLabel lblErwarteteEinnahmen = new JLabel("Erwartete Einnahmen:");
-		sl_start.putConstraint(SpringLayout.SOUTH, list, -20, SpringLayout.NORTH, lblErwarteteEinnahmen);
-		sl_start.putConstraint(SpringLayout.NORTH, lblErwarteteEinnahmen, 432, SpringLayout.NORTH, start);
-		sl_start.putConstraint(SpringLayout.WEST, lblErwarteteEinnahmen, 10, SpringLayout.WEST, start);
-		sl_start.putConstraint(SpringLayout.SOUTH, lblErwarteteEinnahmen, 484, SpringLayout.NORTH, start);
-		sl_start.putConstraint(SpringLayout.EAST, lblErwarteteEinnahmen, 239, SpringLayout.WEST, start);
-		lblErwarteteEinnahmen.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		start.add(lblErwarteteEinnahmen);
-		
-		txt_einnahmen = new JTextField();
-		sl_start.putConstraint(SpringLayout.NORTH, txt_einnahmen, 5, SpringLayout.SOUTH, lblErwarteteEinnahmen);
-		sl_start.putConstraint(SpringLayout.WEST, txt_einnahmen, 10, SpringLayout.WEST, start);
-		sl_start.putConstraint(SpringLayout.SOUTH, txt_einnahmen, 48, SpringLayout.SOUTH, lblErwarteteEinnahmen);
-		sl_start.putConstraint(SpringLayout.EAST, txt_einnahmen, -577, SpringLayout.EAST, start);
-		start.add(txt_einnahmen);
-		txt_einnahmen.setColumns(10);
+
 		
 		
 		TimePickerSettings timeSettings = new TimePickerSettings();
         timeSettings.generatePotentialMenuTimes(TimeIncrement.OneHour, null, null);
+		
+		JPanel start_1 = new JPanel();
+		tabbedPane.addTab("Übersicht", new ImageIcon(gui.class.getResource("/com/jgoodies/looks/plastic/icons/HomeFolder.gif")), start_1, null);
+		SpringLayout sl_start_1 = new SpringLayout();
+		start_1.setLayout(sl_start_1);
+		
+
+		
+		
+		//ENDE LIST MODELL
+		
+
+		
+		JList list = new JList(lst_occupiedplanes);
+		sl_start_1.putConstraint(SpringLayout.WEST, list, 10, SpringLayout.WEST, start_1);
+		list.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		list.setSelectionModel(m);
+		start_1.add(list);
+		
+		JLabel lblHeuteVerlieheneFlugzeuge = new JLabel("\u00DCbersicht f\u00FCr Heute");
+		sl_start_1.putConstraint(SpringLayout.WEST, lblHeuteVerlieheneFlugzeuge, 10, SpringLayout.WEST, start_1);
+		sl_start_1.putConstraint(SpringLayout.EAST, lblHeuteVerlieheneFlugzeuge, 0, SpringLayout.EAST, start_1);
+		sl_start_1.putConstraint(SpringLayout.NORTH, list, 32, SpringLayout.SOUTH, lblHeuteVerlieheneFlugzeuge);
+		lblHeuteVerlieheneFlugzeuge.setHorizontalAlignment(SwingConstants.CENTER);
+		sl_start_1.putConstraint(SpringLayout.NORTH, lblHeuteVerlieheneFlugzeuge, 11, SpringLayout.NORTH, start_1);
+		lblHeuteVerlieheneFlugzeuge.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		start_1.add(lblHeuteVerlieheneFlugzeuge);
+		
+		JLabel lblErwarteteEinnahmen = new JLabel("Erwartete Einnahmen:");
+		sl_start_1.putConstraint(SpringLayout.NORTH, lblErwarteteEinnahmen, 431, SpringLayout.NORTH, start_1);
+		sl_start_1.putConstraint(SpringLayout.WEST, lblErwarteteEinnahmen, 10, SpringLayout.WEST, start_1);
+		sl_start_1.putConstraint(SpringLayout.EAST, lblErwarteteEinnahmen, 0, SpringLayout.EAST, start_1);
+		sl_start_1.putConstraint(SpringLayout.SOUTH, list, -6, SpringLayout.NORTH, lblErwarteteEinnahmen);
+		lblErwarteteEinnahmen.setHorizontalAlignment(SwingConstants.CENTER);
+		lblErwarteteEinnahmen.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		start_1.add(lblErwarteteEinnahmen);
+		
+		txt_einnahmen = new JTextField();
+		sl_start_1.putConstraint(SpringLayout.SOUTH, lblErwarteteEinnahmen, -6, SpringLayout.NORTH, txt_einnahmen);
+		sl_start_1.putConstraint(SpringLayout.WEST, txt_einnahmen, 10, SpringLayout.WEST, start_1);
+		sl_start_1.putConstraint(SpringLayout.EAST, txt_einnahmen, -10, SpringLayout.EAST, start_1);
+		sl_start_1.putConstraint(SpringLayout.NORTH, txt_einnahmen, 489, SpringLayout.NORTH, start_1);
+		start_1.add(txt_einnahmen);
+		txt_einnahmen.setColumns(10);
+		
+		
+		lbl_starterror = new JLabel("");
+		sl_start_1.putConstraint(SpringLayout.EAST, list, -10, SpringLayout.EAST, lbl_starterror);
+		sl_start_1.putConstraint(SpringLayout.SOUTH, txt_einnahmen, -85, SpringLayout.NORTH, lbl_starterror);
+		sl_start_1.putConstraint(SpringLayout.NORTH, lbl_starterror, 5, SpringLayout.SOUTH, start_1);
+		sl_start_1.putConstraint(SpringLayout.EAST, lbl_starterror, 0, SpringLayout.EAST, start_1);
+		start_1.add(lbl_starterror);
+		sl_start_1.putConstraint(SpringLayout.WEST, lbl_starterror, 0, SpringLayout.WEST, start_1);
+		lbl_starterror.setIcon(new ImageIcon(error1));
+		
+
+		//Methode zeigt heutige Einnahmen.
+		txt_einnahmen.setText(String.valueOf(methods.earningstoday(datas))+ "€");
 		
         
 		JPanel create = new JPanel();
@@ -320,7 +336,11 @@ public class gui extends JFrame implements ActionListener {
 				String name = txt_name.getText();	
 				
 				btn_addleihe.setEnabled(false);
-				
+				timepick_bis.setTime(null);
+				timepick_von.setTime(null);
+				datepick.setDate(null);
+				txt_name.setText("");
+				btn_addleihe.setEnabled(true);
 				/*
 				//Debug-Möglichkeit (Console Output der Benötigten Variablen und ihrem Inhalt (On-Click))
 				
@@ -351,6 +371,7 @@ public class gui extends JFrame implements ActionListener {
 			}
 		});
 		create.add(btn_addleihe);
+		btn_addleihe.setEnabled(false);
 				
 		JLabel lblBuchungAufName = new JLabel("Buchung auf Name :");
 		sl_create.putConstraint(SpringLayout.NORTH, lblBuchungAufName, 2, SpringLayout.NORTH, lst_leihemoeglich);
@@ -365,32 +386,6 @@ public class gui extends JFrame implements ActionListener {
 		sl_create.putConstraint(SpringLayout.EAST, txt_name, 248, SpringLayout.EAST, timepick_von);
 		create.add(txt_name);
 		txt_name.setColumns(10);
-				
-		JLabel lblFreiVon = new JLabel("Frei Von :");
-		sl_create.putConstraint(SpringLayout.NORTH, lblFreiVon, 0, SpringLayout.NORTH, lst_leihemoeglich);
-		sl_create.putConstraint(SpringLayout.WEST, lblFreiVon, 0, SpringLayout.WEST, timepick_von);
-		create.add(lblFreiVon);
-				
-		txt_freivon = new JTextField();
-		sl_create.putConstraint(SpringLayout.NORTH, txt_freivon, 0, SpringLayout.NORTH, txt_name);
-		sl_create.putConstraint(SpringLayout.WEST, txt_freivon, 41, SpringLayout.EAST, lst_leihemoeglich);
-		sl_create.putConstraint(SpringLayout.SOUTH, txt_freivon, 0, SpringLayout.SOUTH, txt_name);
-		sl_create.putConstraint(SpringLayout.EAST, txt_freivon, 0, SpringLayout.EAST, timepick_von);
-		create.add(txt_freivon);
-		txt_freivon.setColumns(10);
-				
-		txt_freibis = new JTextField();
-		sl_create.putConstraint(SpringLayout.WEST, txt_freibis, 0, SpringLayout.WEST, timepick_von);
-		sl_create.putConstraint(SpringLayout.EAST, txt_freibis, 0, SpringLayout.EAST, timepick_von);
-		create.add(txt_freibis);
-		txt_freibis.setColumns(10);
-				
-		JLabel lblNewLabel_1 = new JLabel("Frei Bis:");
-		sl_create.putConstraint(SpringLayout.NORTH, txt_freibis, 6, SpringLayout.SOUTH, lblNewLabel_1);
-		sl_create.putConstraint(SpringLayout.SOUTH, txt_freibis, 51, SpringLayout.SOUTH, lblNewLabel_1);
-		sl_create.putConstraint(SpringLayout.SOUTH, lblNewLabel_1, -353, SpringLayout.SOUTH, create);
-		sl_create.putConstraint(SpringLayout.WEST, lblNewLabel_1, 0, SpringLayout.WEST, timepick_von);
-		create.add(lblNewLabel_1);
 		
 		lbl_newerror = new JLabel("");
 		sl_create.putConstraint(SpringLayout.NORTH, lbl_newerror, 5, SpringLayout.SOUTH, create);
@@ -399,17 +394,18 @@ public class gui extends JFrame implements ActionListener {
 		sl_create.putConstraint(SpringLayout.WEST, lbl_newerror, 0, SpringLayout.WEST, create);
 		lbl_newerror.setIcon(new ImageIcon(error1));
 				
+		
+		
+
 				
-				
-		//EventListener
+		//EventListener DATE&TIME
 				
 		timepick_von.addTimeChangeListener(new TimeChangeListener() {
 		public void timeChanged(TimeChangeEvent event) {
-				btn_addleihe.setEnabled(true);
 				LocalTime time = timepick_von.getTime();
-				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
+				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("")) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-				
+					btn_addleihe.setEnabled(true);
 						availableplanes.removeAllElements();
 						
 					for (int i=0; i < returnplanes.length; i++) {
@@ -425,10 +421,10 @@ public class gui extends JFrame implements ActionListener {
 						
 		timepick_bis.addTimeChangeListener(new TimeChangeListener() {
 		public void timeChanged(TimeChangeEvent event) {
-			btn_addleihe.setEnabled(true);
-				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
+			
+				if (datepick.getDateStringOrEmptyString()!=("") && timepick_von.getTimeStringOrEmptyString()!=("") && timepick_bis.getTimeStringOrEmptyString()!=("")) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-					
+					btn_addleihe.setEnabled(true);	
 						availableplanes.removeAllElements();
 							
 					for (int i=0; i < returnplanes.length; i++) {
@@ -453,10 +449,10 @@ public class gui extends JFrame implements ActionListener {
 				
 		datepick.addDateChangeListener(new DateChangeListener() {
 		public void dateChanged(DateChangeEvent event) {
-			btn_addleihe.setEnabled(true);
+			
 				if (datepick.getDateStringOrEmptyString()!=("") & timepick_von.getTimeStringOrEmptyString()!=("") & timepick_bis.getTimeStringOrEmptyString()!=("") ) {
 					String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));	
-						
+					btn_addleihe.setEnabled(true);		
 						availableplanes.removeAllElements();
 					
 					for (int i=0; i < returnplanes.length; i++) {
@@ -474,12 +470,19 @@ public class gui extends JFrame implements ActionListener {
 		
 		//Objekte im Elemente tab
 		
-		
 		JPanel manage = new JPanel();
 		tabbedPane.addTab("Flugzeug Management", new ImageIcon(gui.class.getResource("/Airplane-Right-Red-icon.png")), manage, null);
 		SpringLayout sl_manage = new SpringLayout();
 		manage.setLayout(sl_manage);
 	    
+		/*
+		JLabel lbl_logo = new JLabel("");
+		sl_manage.putConstraint(SpringLayout.NORTH, lbl_logo, 0, SpringLayout.NORTH, start);
+		sl_manage.putConstraint(SpringLayout.EAST, lbl_logo, 0, SpringLayout.EAST, start);
+		Image logo = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
+		lbl_logo.setIcon(new ImageIcon(logo));
+		manage.add(lbl_logo);
+		*/
 		
 		JList saved_planes = new JList(listenModell);
 		sl_manage.putConstraint(SpringLayout.NORTH, saved_planes, 78, SpringLayout.NORTH, manage);
@@ -571,18 +574,12 @@ public class gui extends JFrame implements ActionListener {
 		sl_manage.putConstraint(SpringLayout.WEST, lblFlugzeugUmbennenen, 54, SpringLayout.EAST, saved_planes);
 		manage.add(lblFlugzeugUmbennenen);
 		
-		
-		lbl_starterror = new JLabel("");
-		sl_start.putConstraint(SpringLayout.NORTH, lbl_starterror, 5, SpringLayout.SOUTH, start);
-		sl_start.putConstraint(SpringLayout.EAST, lbl_starterror, 0, SpringLayout.EAST, start);
-		start.add(lbl_starterror);
-		sl_start.putConstraint(SpringLayout.WEST, lbl_starterror, 0, SpringLayout.WEST, start);
-		lbl_starterror.setIcon(new ImageIcon(error1));
-		
-		
-
-		//Methode zeigt heutige Einnahmen.
-		txt_einnahmen.setText(String.valueOf(methods.earningstoday(datas))+ "€");
+		JLabel lbl_logonew = new JLabel("");
+		sl_manage.putConstraint(SpringLayout.SOUTH, lbl_logonew, -10, SpringLayout.SOUTH, manage);
+		sl_manage.putConstraint(SpringLayout.EAST, lbl_logonew, -10, SpringLayout.EAST, manage);
+		Image logo = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
+		lbl_logonew.setIcon(new ImageIcon(logo));
+		manage.add(lbl_logonew);
 		
 		
 		t=new Timer(10,new ActionListener() {
@@ -606,6 +603,14 @@ public class gui extends JFrame implements ActionListener {
 				if (g_imagename.equals("ende_vor_beginn")) {
 					lbl_starterror.setIcon(new ImageIcon (ende_vor_beginn));
 					lbl_newerror.setIcon(new ImageIcon (ende_vor_beginn));
+				}
+				if (g_imagename.equals("no_plane")) {
+					lbl_starterror.setIcon(new ImageIcon (no_plane));
+					lbl_newerror.setIcon(new ImageIcon (no_plane));
+				}
+				if (g_imagename.equals("no_name")) {
+					lbl_starterror.setIcon(new ImageIcon (no_name));
+					lbl_newerror.setIcon(new ImageIcon (no_name));
 				}
 					
 					

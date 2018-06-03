@@ -219,6 +219,7 @@ public class methods {
 			
 			if (plane.equals("null")) {
 				System.out.println("Err: Kein Flugzeug ausgewählt. Bitte wählen sie ein Flugzeug aus.");
+				gui.setlabelimage("no_plane");
 			}
 			if (von.equals(":00")) {
 				System.out.println("Err: \"Von\" nicht definiert. Bitte wählen sie eine Zeit für \"Von\" aus.");			
@@ -231,6 +232,7 @@ public class methods {
 			}
 			if (name.equals("")) {
 				System.out.println("Err: Kein Name angegeben. Bitte geben sie einen Namen für die Buchung an (e.g. den Familiennamen)");
+				gui.setlabelimage("no_name");
 			}
 			return;
 		}
@@ -324,7 +326,7 @@ public class methods {
 					String today = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 					String planes[] = read_write.lesen("planes.txt");
 					String occupiedplanes[] = new String[planes.length];
-					String occupiedplanes2[][] = new String[occupiedplanes.length][2];
+					String occupiedplanes2[][] = new String[occupiedplanes.length][4];
 						
 						//Eindimensionales Array in Multidimensionales Array
 						for(int i=0; i < datas.length; i++) {
@@ -408,6 +410,8 @@ public class methods {
 										//Integer.valueOf(occupiedplanes2[z][1]) + diff
 										
 										occupiedplanes2[z][1]= String.valueOf((Integer.valueOf(occupiedplanes2[z][1]) + prozent));
+										occupiedplanes2[z][2]=datas2[i][5];
+										occupiedplanes2[z][3]=datas2[i][3] + " - " + datas2[i][4];
 										
 										System.out.println("Flugzeug " + occupiedplanes2[z][0] + " geliehene Stunden "+ occupiedplanes2[z][1]);
 										
@@ -426,7 +430,7 @@ public class methods {
 							
 							try {
 								if (occupiedplanes[x] != null){
-									occupiedplanes[x]= occupiedplanes2[x][0] + " [ Ausgelastet zu " + occupiedplanes2[x][1] + "% ]";
+									occupiedplanes[x]= occupiedplanes2[x][0] + " | Geliehen Von: " + occupiedplanes2[x][2] + " | Im Zeitraum: " + occupiedplanes2[x][3] + " | Ausgelastet zu " + occupiedplanes2[x][1] + "%";
 								}
 								
 								
