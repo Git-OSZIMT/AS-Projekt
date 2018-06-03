@@ -335,10 +335,7 @@ public class gui extends JFrame implements ActionListener {
 				String datum = datepick.getDateStringOrEmptyString();
 				String name = txt_name.getText();	
 				
-				btn_addleihe.setEnabled(false);
-				timepick_bis.setTime(null);
-				timepick_von.setTime(null);
-				datepick.setDate(null);
+
 				txt_name.setText("");
 				btn_addleihe.setEnabled(true);
 				/*
@@ -356,14 +353,18 @@ public class gui extends JFrame implements ActionListener {
 				
 				//aktuallisieren der "Heute verliehenen Flugzeuge" bei neuer Leihe
 				
-				String occupiedplanes[] = methods.occupiedtoday(read_write.lesen("data.txt"));
-				lst_occupiedplanes.removeAllElements();
-				for (int i = 0; i < occupiedplanes.length; i++) {
-					lst_occupiedplanes.addElement(occupiedplanes[i]);
+				String[] returnplanes = methods.checkavailable(datepick.getDateStringOrEmptyString(), timepick_von.getTimeStringOrEmptyString(), timepick_bis.getTimeStringOrEmptyString() , read_write.lesen("data.txt"), read_write.lesen("planes.txt"));
+				availableplanes.removeAllElements();
+									
+				for (int i=0; i < returnplanes.length; i++) {
+											
+					availableplanes.addElement(returnplanes[i]);
 				}
-				for (int i = 0; i < lst_occupiedplanes.getSize(); i++) {
-					lst_occupiedplanes.removeElement(null);
-				}
+				
+				btn_addleihe.setEnabled(false);
+				timepick_bis.setTime(null);
+				timepick_von.setTime(null);
+				datepick.setDate(null);
 				
 				//aktuallisieren der "Heutigen Einnahmen" bei neuer Leihe
 				
