@@ -385,7 +385,7 @@ public class methods {
 						
 							int diff = Integer.valueOf(bis) - Integer.valueOf(von);
 						//	System.out.println("diff: " + diff);
-							double proz=(100/12.0)*diff;
+							double proz=(100/12.0)*diff-2;
 							
 							DecimalFormat df = new DecimalFormat("#.##");
 							String prozent=df.format(proz);
@@ -408,8 +408,10 @@ public class methods {
 										//Prozentumerechnen
 										//12 = 100%
 										//Integer.valueOf(occupiedplanes2[z][1]) + diff
-										
-										occupiedplanes2[z][1]= String.valueOf((Integer.valueOf(occupiedplanes2[z][1]) + prozent));
+										float working = Float.valueOf(occupiedplanes2[z][1]);
+										float working1 = Float.valueOf(prozent);
+										//System.out.print(String.valueOf((Integer.valueOf(occupiedplanes2[z][1]) + prozent)));
+										occupiedplanes2[z][1]= String.valueOf((working+working1));
 										occupiedplanes2[z][2]=datas2[i][5];
 										occupiedplanes2[z][3]=datas2[i][3] + " - " + datas2[i][4];
 										
