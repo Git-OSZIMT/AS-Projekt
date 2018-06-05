@@ -121,13 +121,14 @@ public class methods {
 							
 							try {
 								Arrays.sort(planes);
+								int z = Arrays.binarySearch(planes, datas2[i][1]);
+								planes[z]=null;
+								
 							} catch (Exception e) {
 								//
 							}
 							
 							
-							int z = Arrays.binarySearch(planes, datas2[i][1]);
-							planes[z]=null;
 							
 						}
 						
@@ -385,11 +386,14 @@ public class methods {
 						
 							int diff = Integer.valueOf(bis) - Integer.valueOf(von);
 						//	System.out.println("diff: " + diff);
-							double proz=(100/12.0)*diff-2;
+							double proz=(100/12.000)*diff-2;
 							
-							DecimalFormat df = new DecimalFormat("#.##");
+						//	System.out.println(proz);
+							
+							DecimalFormat df = new DecimalFormat("#,##");
 							String prozent=df.format(proz);
 							
+						//	System.out.println(prozent + "proz");
 							
 							//System.out.println("Prozent " + prozent);
 							//System.out.println("diff " + diff + " bis " + bis + "von " + von);

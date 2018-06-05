@@ -613,7 +613,8 @@ public class gui extends JFrame implements ActionListener {
 					lbl_newerror.setIcon(new ImageIcon (no_name));
 				}
 					
-					
+				btn_addleihe.setEnabled(false);
+				
 				if(animpos == false) { 
 					
 					lbl_starterror.setLocation(0,pixel+613); //Verschiebt Label ,keine Ahnung warum da 613 steht. Vermutung: Das Fenster ist so groﬂ

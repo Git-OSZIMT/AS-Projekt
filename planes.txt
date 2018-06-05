@@ -1,6 +1,5 @@
-5
+4
 Cessna 01
 Cessna 02
 Cessna 03
 Kingair II
-Kingair TurboProp
