@@ -386,11 +386,11 @@ public class methods {
 						
 							int diff = Integer.valueOf(bis) - Integer.valueOf(von);
 						//	System.out.println("diff: " + diff);
-							double proz=(100/12.000)*diff-2;
+							double proz=(100/12.0)*diff-2;
 							
 						//	System.out.println(proz);
 							
-							DecimalFormat df = new DecimalFormat("#,##");
+							DecimalFormat df = new DecimalFormat("#.##");
 							String prozent=df.format(proz);
 							
 						//	System.out.println(prozent + "proz");

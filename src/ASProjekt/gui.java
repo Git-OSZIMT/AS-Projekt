@@ -360,6 +360,15 @@ public class gui extends JFrame implements ActionListener {
 					availableplanes.addElement(returnplanes[i]);
 				}
 				
+				String occupiedplanes[] = methods.occupiedtoday(read_write.lesen("data.txt"));
+				lst_occupiedplanes.removeAllElements();
+				for (int i = 0; i < occupiedplanes.length; i++) {
+					lst_occupiedplanes.addElement(occupiedplanes[i]);
+				}
+				for (int i = 0; i < lst_occupiedplanes.getSize(); i++) {
+					lst_occupiedplanes.removeElement(null);
+				}
+				
 				btn_addleihe.setEnabled(false);
 				timepick_bis.setTime(null);
 				timepick_von.setTime(null);
